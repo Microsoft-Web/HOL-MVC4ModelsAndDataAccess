@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Lab xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ContentFramework.Core.Models">
-  <Id>{replace_with_content_id}</Id>
+  <Id>ASPNETMVC4ModelsAndDataAccess</Id>
   <Author>
-    <Name>{replace_with_content_author}</Name>
+    <Name>.</Name>
   </Author>
-  <Description>{replace_with_content_description</Description>  
+  <Description>This Hands-on Lab will show you how to use the free SQL Server Express as a database engine in order to store and retrieve the data needed for the Music Store application. To accomplish that, you will start with an already created database, from which you will generate the Entity Data Model you will use in the application.</Description>  
   <Document ConversionType="Html">.\HOL.md</Document>
-  <Title>{replace_with_content_title}</Title>
-  <Version>1.0</Version>
+  <Title>ASP.NET MVC 4 Models and Data Access</Title>
+  <Version>2.0.0</Version>
   <Source>Source</Source>
-  <DependencyChecker>.\Source\Setup\Dependencies.depi</DependencyChecker>
   <CustomProperties>
-	<Property Name="GithHubRepository" Value="{replace_with_content_repository_https_URL}" />
+	<Property Name="GithHubRepository" Value="https://github.com/Microsoft-Web/HOL-MVC4ModelsAndDataAccess/" />
   </CustomProperties>   
 </Lab>
