@@ -28,9 +28,9 @@ In code first, Model objects are defined with POCOs , "Plain Old CLR Objects". P
 
 The benefit of using this approach is that the Model remains independent from the persistence framework (in this case, Entity Framework), as the POCOs classes are not coupled with the mapping framework.
 
-**Note:** Although that this Hands-on Lab will cover the use of the free SQL Server Express, the code will also work with the full version of SQL Server.
+> **Note:** Although that this Hands-on Lab will cover the use of the free SQL Server Express, the code will also work with the full version of SQL Server.
 
-This Lab is based on ASP.NET MVC 3.
+This Lab is based on ASP.NET MVC 4.
 
 If you wish to explore the whole Music Store tutorial application you can find it in [http://mvcmusicstore.codeplex.com/](http://mvcmusicstore.codeplex.com/).
 
@@ -39,11 +39,7 @@ If you wish to explore the whole Music Store tutorial application you can find i
 
 You must have the following items to complete this lab:
 
-1. ASP.NET and ASP.NET MVC 3
-
-1. Visual Studio 2010 Express
-
-1. SQL Server Database (Express edition or above)
+1. Visual Studio 11 Express Beta for Web
 
 	> **Note**: You can install the previous system requirements by using the Web Platform Installer 3.0: [http://go.microsoft.com/fwlink/?LinkID=194638](http://go.microsoft.com/fwlink/?LinkID=194638).
 
@@ -81,9 +77,23 @@ In this exercise, you will learn how to add a database with the tables of the Mu
 <a name="Ex1Task1" />
 #### Task 1 - Adding a Database ####
 
-1. In this task, you will add an already created database with the main tables of the MusicStore application to the solution. Start Microsoft Visual Web Developer 2010 Express from **Start** | **All Programs** | **Microsoft Visual Studio 2010 Express** | **Microsoft Visual Web Developer 2010 Express**.
+1. In this task, you will add an already created database with the main tables of the MusicStore application to the solution. Start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
 
 1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex01-AddingADatabaseDBFirst\Begin, select **MvcMusicStore.sln** and click **Open**.
+
+1.	Follow these steps to install the **NuGet** package dependencies.
+
+	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
+
+	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
+
+	c.	After installing the package, type **Enable-PackageRestore**.
+
+	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
+
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
+	
+	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
 
 1. Add an **App_Data** folder to the project to hold the SQL Server Express database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
 
@@ -107,47 +117,13 @@ In this exercise, you will learn how to add a database with the tables of the Mu
  
 	_MvcMusicStore database in Solution Explorer_
 
-1. Verify the connection to the database. To do this, open the **Database Explorer** (CTRL+ALT+S), and then double-click the **MvcMusicStore.mdf**. The connection is established.
+1. Verify the connection to the database. To do this, double-click the **MvcMusicStore.mdf**. The connection is established.
 
  	![Connecting to MvcMusicStore.mdf](./images/Connecting-to-MvcMusicStore.mdf.png?raw=true "Connecting to MvcMusicStore.mdf")
  
 	_Connecting to MvcMusicStore.mdf_
 
-	> **Note:** If you get an error like the following, please follow the steps below. 
 
-	> ![LocalDatabaseFile](images/localdatabasefile.png?raw=true)
-
-	>1.Open the Windows Services console. To do that, open the Run command from **Start** | **All Programs** | **Accessories** | **Run**, type **services.msc** and then click **OK.**
-
-	> ![RunServicesMsc](images/runservicesmsc.png?raw=true)
-
-	> _Running services.msc_
-
-	>2.Right-click the **SQL Server (SQLEXPRESS)** service and select **Properties**.
-
-	> ![ServicesConsole](images/servicesconsole.png?raw=true)
-	
-	> _SQL Server (SQLEXPRESS) service_
-
-	>3.Open the **Log On** tab, select **Local System account** as the account to log on with and click **OK**. Accept the dialog by clicking **OK** again. 
-
-	> ![SqlExpressService](images/sqlexpressservice.png?raw=true)
-
-	> _Changing the log on account_
-
-	>4.Restart the SQL Server (SQLEXPRESS) service.
-
-	> ![RestartSqlServer](images/restartsqlserver.png?raw=true)
-
-	> _Restarting SQL Server (SQLEXPRESS) service_
-
-	>5.Once the service is restarted, close the **Services** console and verify the connection to the database. To do this, select the **Database Explorer**, and then double-click the **MvcMusicStore.mdf**. The connection is established.
-
-	> ![DatabaseExplorer](images/databaseexplorer.png?raw=true)
-
-	> _Connecting to MvcMusicStore.mdf_
-
- 
 <a name="Ex1Task2" />
 #### Task 2 - Creating a Data Model ####
 
@@ -165,13 +141,13 @@ In this task, you will create a data model to interact with the database added i
  
 	_Choosing the model content_
 
-1. Since you are generating a model from a database, you will need to specify which database to use. The wizard detects the database in the App_Data folder, so it fills in the correct connection information for that database. The generated class will have the same name as the entity connection string, so change it to **MusicStoreEntities** and click **Next**.
+1. Since you are generating a model from a database, you will need to specify which database to use. This should be done by selecting the database **MvcMusicStore.mdf** from the dropdown, so it fills in the correct connection information for that database. The generated class will have the same name as the entity connection string, so change it to **MusicStoreEntities** and click **Next**.
 
  	![Choosing the data connection](./images/Choosing-the-data-connection.png?raw=true "Choosing the data connection")
  
 	_Choosing the data connection_
 
-1. Choose the database objects to use. Since the Entity Model will use just the database's tables, check the **Tables** checkbox and make sure that the **Include foreign key columns in the model** checkbox is also checked. Change the Model Namespace to **MvcMusicStoreModel** and click **Finish**.
+1. Choose the database objects to use. Since the Entity Model will use just the database's tables, check the **Tables** checkbox and make sure that the **Include foreign key columns in the model** and **Pluralize or singularize generated object names** checkboxes are also checked. Change the Model Namespace to **MvcMusicStoreModel** and click **Finish**.
 
  	![Choosing the database objects](./images/Choosing-the-database-objects.png?raw=true "Choosing the database objects")
  
@@ -304,9 +280,23 @@ In this task, you will add an already created database with the main tables of t
 
 > **Note:** This task is in common with Exercise 1. 
 
-1. Start Microsoft Visual Web Developer 2010 Express from **Start** | **All Programs** | **Microsoft Visual Studio 2010 Express** | **Microsoft Visual Web Developer 2010 Express**.
+1. Start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
 
 1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex02-AddingADatabaseCodeFirst\Begin, select **MvcMusicStore.sln** and click **Open**.
+
+1.	Follow these steps to install the **NuGet** package dependencies.
+
+	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
+
+	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
+
+	c.	After installing the package, type **Enable-PackageRestore**.
+
+	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
+
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
+	
+	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
 
 1. Add an **App_Data** folder to the project to hold the SQL Server Express database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
 
@@ -619,9 +609,23 @@ In this task, you will check that the Store Index page will now display the Genr
 
 In this task, you will change the **StoreController** class to access the database to retrieve albums from a specific genre.
 
-1. If not already open, start Microsoft Visual Web Developer 2010 Express from **Start** | **All Programs** | **Microsoft Visual Studio 2010 Express** | **Microsoft Visual Web Developer 2010 Express**.
+1. If not already open, start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
 
 1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex03-QueryingTheDatabaseWithParametersDBFirst\Begin (or Ex03-QueryingTheDatabaseWithParametersCodeFirst\Begin if you want to use a Code First approach), select **MvcMusicStore.sln** and click **Open**. Alternatively, you may continue with the solution that you obtained after completing any of the previous exercises.
+
+1.	Follow these steps to install the **NuGet** package dependencies.
+
+	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
+
+	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
+
+	c.	After installing the package, type **Enable-PackageRestore**.
+
+	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
+
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
+	
+	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
 
 1. Open the **StoreController** class to change the **Browse** action method. To do this, in the **Solution Explorer**, expand the **Controllers** folder and double-click **StoreController.cs**.
 
