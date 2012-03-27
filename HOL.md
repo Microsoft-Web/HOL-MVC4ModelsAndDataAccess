@@ -273,7 +273,7 @@ Once adding the database and generating the model, you will make the proper adju
 
 > **Note:** If you have completed Exercise 1 and have already worked with Database approach, you will now learn how to get the same results with a different process. Some tasks will be repeated with Exercise 1, so they are marked appropriately to make your reading easier. If you have not completed Exercise 1 but would like to learn the Code First approach, you can start from this exercise and get a full coverage of the topic.
 
-<a name="Ex1Task1" />
+<a name="Ex2Task1" />
 #### Task 1 - Adding a Database ####
 
 In this task, you will add an already created database with the main tables of the MusicStore application to the solution.
@@ -333,7 +333,7 @@ In this task, you will add an already created database with the main tables of t
 	_Closing the connection_
 
  
-<a name="Ex1Task2" />
+<a name="Ex2Task2" />
 #### Task 2 - Configuring the connection to the Database ####
 
 Now that we have already added a database to our project, we will write in the Web.config the connection string.
@@ -354,7 +354,7 @@ Now that we have already added a database to our project, we will write in the W
 	````
 
  
-<a name="Ex1Task3" />
+<a name="Ex2Task3" />
 #### Task 3 - Working with the Model ####
 
 Now that we have already configured the connection to the database, we will link the model with the database tables. In this task, we will create a class that will be linked to the database with Code First. Remember we already have a POCO model class that should be modified.
@@ -473,7 +473,7 @@ Now that we have already configured the connection to the database, we will link
 	> **Note:** By default, entity framework will try to create the database, in order to avoid that, we configure the database initializer in the **MusicStoreEntities** constructor to a null value. This way, no database initialization will be executed.
 
  
-<a name="Ex1Task4" />
+<a name="Ex2Task4" />
 #### Task 4 - Querying the Database ####
 
 In this task, you will update the StoreController class so that instead of using hard-coded data, it can consume it from the database.
@@ -537,7 +537,7 @@ In this task, you will update the StoreController class so that instead of using
 	````
 
  
-<a name="Ex1Task5" />
+<a name="Ex2Task5" />
 #### Task 5 - Running the Application ####
 
 In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hard-coded ones. There is no need of changing the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, although this time the data will come from the database. 
@@ -558,7 +558,7 @@ In this task, you will check that the Store Index page will now display the Genr
 
 > **Note:** For further information on Query Result Shaping, visit the following [msdn article](http://msdn.microsoft.com/en-us/library/bb896272&#040;v=vs.100&#041;.aspx).
 
-<a name="Ex1Task1" />
+<a name="Ex3Task1" />
 #### Task 1 - Modifying StoreController to Retrieve Albums from Database ####
 
 In this task, you will change the **StoreController** class to access the database to retrieve albums from a specific genre.
@@ -615,7 +615,7 @@ In this task, you will change the **StoreController** class to access the databa
 	> The query includes **Genres.Include("Albums")** to indicate that you want related albums as well. This will result in a more efficient application, since it will retrieve both Genre and Album data in a single database request.
 
  
-<a name="Ex1Task2" />
+<a name="Ex3Task2" />
 #### Task 2 - Running the Application ####
 
 In this task, you will try out the Application in a web browser and obtain albums for a specific genre from the database.
@@ -629,7 +629,7 @@ In this task, you will try out the Application in a web browser and obtain album
 	_Browsing /Store/Browse?genre=Jazz_
 
  
-<a name="Ex1Task3" />
+<a name="Ex3Task3" />
 #### Task 3 - Accessing Albums by Id ####
 
 In this task, you will repeat the previous procedure, in this case, to obtain albums by Id.
@@ -653,7 +653,7 @@ In this task, you will repeat the previous procedure, in this case, to obtain al
 	````
 
  
-<a name="Ex1Task4" />
+<a name="Ex3Task4" />
 #### Task 4 - Running the Application ####
 
 In this task, you will try out the Application in a web browser and obtain album details based on its Id.
