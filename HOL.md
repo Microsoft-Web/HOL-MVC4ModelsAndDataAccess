@@ -1,12 +1,12 @@
 ﻿<a name="ASP.NET MVC Models and Data Access">
 
-# ASP.NET MVC Models and Data Access #
+# ASP.NET MVC 4 Models and Data Access #
 ---
 
 <a name="Overview" />
 ## Overview ##
 
->**Note:** This Hands-on Lab assumes you have basic knowledge of **ASP.NET MVC**. If you have not used **ASP.NET MVC** before, we recommend you to go over **ASP.NET MVC Fundamentals** Hand-on Lab.
+>**Note:** This Hands-on Lab assumes you have basic knowledge of **ASP.NET MVC**. If you have not used **ASP.NET MVC** before, we recommend you to go over **ASP.NET MVC 4 Fundamentals** Hand-on Lab.
 
 In **ASP.NET MVC Fundamentals** Hand-on Lab, you have been passing hard-coded data from the Controllers to the View templates. But in order to build a real web application you might want to use a real database.
 
