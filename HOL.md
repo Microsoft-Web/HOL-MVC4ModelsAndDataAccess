@@ -35,20 +35,59 @@ This Lab is based on ASP.NET MVC 4.
 If you wish to explore the whole Music Store tutorial application you can find it in [http://mvcmusicstore.codeplex.com/](http://mvcmusicstore.codeplex.com/).
 
  
-**System Requirements**
+<a name="SystemRequirements" />
+### System Requirements ###
 
 You must have the following items to complete this lab:
 
-1. Visual Studio 11 Express Beta for Web
-
-	> **Note:** You can install the previous system requirements by using the Web Platform Installer 3.0: [http://go.microsoft.com/fwlink/?LinkID=194638](http://go.microsoft.com/fwlink/?LinkID=194638).
+- Visual Studio 11 Express Beta for Web
 
 <a name="Setup" />
-**Setup**
+### Setup ###
 
-_**Installing Code Snippets**_
+#### Installing Code Snippets####
+For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run the **.\Source\Assets\CodeSnippets.vsi** file.
 
-For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Assets\InstallCodeSnippets.cmd** file.
+####Installing Web Platform Installer####
+This section assumes that you don't have some or all the system requirements installed. In case you do, you can simply skip this section.
+
+Microsoft Web Platform Installer (WebPI) is a tool that manages the installation of the prerequisites for this Lab.
+
+> **Note:** As well as the Microsoft Web Platform, WebPI can also install many of the open source applications that are available like Umbraco, Kentico, DotNetNuke and many more.  These are very useful for providing a foundation from which to customize an application to your requirements, dramatically cutting down your development time.
+
+Please follow these steps to downloads and install Microsoft Visual Studio 11 Express Beta for Web:
+
+1. Install **Visual Studio 11 Express Beta for Web**. To do this, Navigate to [http://www.microsoft.com/web/gallery/install.aspx?appid=VWD11_BETA&prerelease=true](http://www.microsoft.com/web/gallery/install.aspx?appid=VWD11_BETA&prerelease=true) using a web browser. 
+
+	![Web Platform Installer 4.0 window](./images/Microsoft-Web-Platform-Installer-4.png?raw=true "Web Platform Installer 4.0 download")
+
+	_Web Platform Installer 4.0 download_
+
+1. The Web Platform Installer launches and shows Visual Studio 11 Express Beta for Web Installation. Click on **Install**.
+
+ 	![Visual Studio 11 Express Beta for Web Installer window](./images/Microsoft-VS-11-Install.png?raw=true "Visual Studio 11 Express Beta for Web Installer window")
+ 
+	_Visual Studio 11 Express Beta for Web Installer window_
+
+1. The **Web Platform Installer** displays the list of software to be installed. Accept by clicking **I Accept**.
+
+ 	![Web Platform Installer window](./images/Microsoft-Web-Platform-Installer-Prerequisites.png?raw=true "Web Platform Installer window")
+ 
+	_Web Platform Installer window_
+
+1. The appropriate components will be downloaded and installed.
+
+ 	![Web Platform Installation - Download progress](./images/Web-Platform-Installation-Download-progress.png?raw=true "Web Platform Installation - Download progress")
+ 
+	_Web Platform Installation - Download progress_
+
+1. The **Web Platform Installer** will resume downloading and installing the products. When this process is finished, the Installer will show the list of all the software installed. Click **Finish**.
+
+ 	![Web Platform Installer](./images/Web-Platform-Installer.png?raw=true "Web Platform Installer")
+ 
+	_Web Platform Installer_
+
+1. Finally the Web Platform Installer shows the installed products. Click **Finish** to finish the setup process.
 
 ---
 
