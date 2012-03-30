@@ -1,4 +1,4 @@
-﻿<a name="ASP.NET MVC Models and Data Access">
+﻿<a name="HOLName" />
 
 # ASP.NET MVC 4 Models and Data Access #
 ---
@@ -102,7 +102,7 @@ This Hands-On Lab is comprised by the following exercises:
 
 1. [Exercise 3: Querying the Database with Parameters](#Exercise3)
 
-1. [Exercise 4 - Using Asynchronous Controllers](#Exercise4)
+1. [Exercise 4: Using Asynchronous Controllers](#Exercise4)
  
 Estimated time to complete this lab: **35 minutes**.
 
@@ -223,7 +223,7 @@ In this task, you will check that although you have removed the **Album** and **
  
 	_Builds succeeded_
 
-1. While the designer displays the entities in a diagram format, they are really C# classes. Expand the **StoreDB.edmx** node in the Solution Explorer, and you will see a file called **StoreDB.Designer.cs.**
+1. While the designer displays the entities in a diagram format, they are really C# classes. Expand the **StoreDB.edmx** node in the Solution Explorer, and you will see a file called **StoreDB.Designer.cs**.
 
  	![StoreDB.Designer.cs file](./images/StoreDB.Designer.cs-file.png?raw=true "StoreDB.Designer.cs file")
  
@@ -237,7 +237,8 @@ In this task, you will update the StoreController class so that instead of using
 
 1. Open **Controllers\StoreController.cs** and add the following field to the class to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex1 storeDB)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 storeDB_)
+
 	<!-- mark:3-4 -->
 	````C#
 	public class StoreController : Controller
@@ -247,7 +248,8 @@ In this task, you will update the StoreController class so that instead of using
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action method to retrieve all **Genre** names in the database. This was done previously by hard-coding string data. Now you can instead write a LINQ query expression like below which retrieves the **Name** property of each Genre within the database:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex1 Store Index)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 Store Index_)
+
 	<!-- mark:6-9 -->
 	````C#
 	//
@@ -263,13 +265,14 @@ In this task, you will update the StoreController class so that instead of using
 	}
 	````
 
-	> **Note:** You are using a capability of .NET called **LINQ** (language-integrated query) to write strongly-typed query expressions against these collections - which will execute code against the database and return objects that you can program against.
+	>**Note:** You are using a capability of .NET called **LINQ** (language-integrated query) to write strongly-typed query expressions against these collections - which will execute code against the database and return objects that you can program against.
 
 	> For more information about LINQ, please visit the [msdn site](http://msdn.microsoft.com/en-us/library/bb397926&#040;v=vs.110&#041;.aspx).
 
 1. Transform the collection of genres to a list. To do this, replace the following code:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex1 Store Index ToList)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 Store Index ToList_)
+
 	<!-- mark:10-12 -->
 	````C#
 	public ActionResult Index()
@@ -288,7 +291,6 @@ In this task, you will update the StoreController class so that instead of using
 	    return View(viewModel);
 	}
 	````
-
  
 <a name="Ex1Task5" />
 #### Task 5 - Running the Application ####
@@ -383,6 +385,7 @@ Now that we have already added a database to our project, we will write in the W
  	![Web.config file location](./images/Web.config-file-location.png?raw=true "Web.config file location")
  
 	_Web.config file location_
+
 	<!-- mark:3-3 -->
 	````XML
 	</configuration>
@@ -405,7 +408,8 @@ Now that we have already configured the connection to the database, we will link
 
 1. Open the POCO model class **Genre** from **Models** project folder and include an ID, a description attribute, and also an album's collection.
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 Code First Genre)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Genre_)
+
 	<!-- mark:10,12-14 -->
 	````C#
 	using System;
@@ -431,7 +435,7 @@ Now that we have already configured the connection to the database, we will link
 
 1. Now, open the POCO model class **Album** from **Models** project folder and include the AlbumId and GenreId properties.
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 Code First Album)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Album_)
 	<!-- mark:10,12 -->
 	````C#
 	using System;
@@ -462,6 +466,7 @@ Now that we have already configured the connection to the database, we will link
 	_Adding a class_
 
 1. Open the class you have just created, **MusicStoreEntities.cs**, and include the namespaces **System.Data.Entity** and **System.Data.Entity.Infrastructure**.
+
 	<!-- mark:5-7 -->
 	````C#
 	using System;
@@ -475,7 +480,8 @@ Now that we have already configured the connection to the database, we will link
 
 1. Replace the class declaration to extend DbContext class: declare a public DBSet and override the method OnModelCreating. After this step you will get a domain class that will link your model with the Entity Framework. In order to do that, replace the class code with the following:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 Code First MusicStoreEntities)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First MusicStoreEntities_)
+
 	<!-- mark:10-27 -->
 	````C#
 	using System;
@@ -524,7 +530,8 @@ In this task, you will update the StoreController class so that instead of using
 
 1. Open **Controllers\StoreController.cs** and add the following field to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 Code First storeDB)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First storeDB_)
+
 	<!-- mark:3-4 -->
 	````C#
 	public class StoreController : Controller
@@ -534,7 +541,8 @@ In this task, you will update the StoreController class so that instead of using
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action to retrieve all **Genre** names in the database. This was done previously by hard-coding string data. Now you can instead write a LINQ query expression like the one below which retrieves the **Name** property of each Genre within the database:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 code First Store Index)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 code First Store Index_)
+
 	<!-- mark:6-9 -->
 	````C#
 	//
@@ -556,7 +564,8 @@ In this task, you will update the StoreController class so that instead of using
 
 1. Transform the collection of genres to a list. To do this, replace the following code:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex2 Code First Genres to List)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Genres to List_)
+
 	<!-- mark:10-12 -->
 	````C#
 	public ActionResult Index()
@@ -625,7 +634,8 @@ In this task, you will change the **StoreController** class to access the databa
 
 1. Change the **Browse** action method to retrieve albums for a specific genre. To do this, replace the following code:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex3 StoreController BrowseMethod)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex3 StoreController BrowseMethod_)
+
 	<!-- mark:6-16 -->
 	````C#
 	//
@@ -678,7 +688,7 @@ In this task, you will repeat the previous procedure, in this case, to obtain al
 
 1. Change the **Details** action method to retrieve albums details based on their **Id**. To do this, replace the following code:
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex3 StoreController DetailsMethod)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex3 StoreController DetailsMethod_)
 	<!-- mark:6-7 -->
 	````C#
 	//
@@ -742,7 +752,7 @@ to query the database asynchronously.
 
 1. Add the following namespace declarations to import the types contained in **System.Collection.ObjectModel** and **System.Threading.Tasks** namespaces.
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex4 Namespace Declarations)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Namespace Declarations_)
 
 	<!-- mark:1-2 -->
 	````C#
@@ -752,7 +762,7 @@ to query the database asynchronously.
 	
 1. In the **StoreController** class, locate the **Index** Action Method. Add the **async** keyword before the return type and make it return the type **Task\<ActionResult\>**.
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex4 Async method)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Async method_)
 
 	<!-- mark:1 -->
 	````C#
@@ -763,7 +773,7 @@ to query the database asynchronously.
 
 1. In the **Index** method, replace the **genres** variable declaration with the following code.
 	
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex4 GenresDeclaration)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 GenresDeclaration_)
 
 	<!-- mark:1 -->
 	````C#	
@@ -772,7 +782,7 @@ to query the database asynchronously.
 
 1. Add a new **Task** for retreiving the genres' names using the **await** keyword before the task call. To do this, insert the highlighted code after the **genres** declaration.
 
-	_(Code Snippet - ASP.NET MVC Models and Data Access - Ex4 Await Task)_
+	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Await Task_)
 	
 	<!-- mark:5-10 -->
 	````C#
@@ -813,8 +823,6 @@ to query the database asynchronously.
 		return View(viewModel);
 	}
 	````
-
- 
 
 ---
 
