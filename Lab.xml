@@ -9,7 +9,4 @@
   <Title>ASP.NET MVC 4 Models and Data Access</Title>
   <Version>2.0.0</Version>
   <Source>Source</Source>
-  <CustomProperties>
-	<Property Name="GithHubRepository" Value="https://github.com/Microsoft-Web/HOL-MVC4ModelsAndDataAccess/" />
-  </CustomProperties>   
 </Lab>
