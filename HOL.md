@@ -1,34 +1,33 @@
 ﻿<a name="HOLTop" />
 
 # ASP.NET MVC 4 Models and Data Access #
+
 ---
 
 <a name="Overview" />
 ## Overview ##
 
->**Note:** This Hands-on Lab assumes you have basic knowledge of **ASP.NET MVC**. If you have not used **ASP.NET MVC** before, we recommend you to go over **ASP.NET MVC 4 Fundamentals** Hand-on Lab.
+>**Note:** This Hands-on Lab assumes you have basic knowledge of **ASP.NET MVC**. If you have not used **ASP.NET MVC** before, we recommend you to go over **ASP.NET MVC 4 Fundamentals** Hands-on Lab.
 
-In **ASP.NET MVC Fundamentals** Hand-on Lab, you have been passing hard-coded data from the Controllers to the View templates. But in order to build a real web application you might want to use a real database.
+In **ASP.NET MVC Fundamentals** Hands-on Lab, you have been passing hard-coded data from the Controllers to the View templates. But, in order to build a real Web application, you might want to use a real database.
 
-This Hands-on Lab will show you how to use the free SQL Server Express as a database engine in order to store and retrieve the data needed for the Music Store application. To accomplish that, you will start with an already created database from which you will create the Entity Data Model for the application. Through this lab, you will meet the **Database First** approach and the **Code First** Approach as well.
+This Hands-on Lab will show you how to use a database engine in order to store and retrieve the data needed for the Music Store application. To accomplish that, you will start with an existing database and create the Entity Data Model from it. Throughout this lab, you will meet the **Database First** approach as well as the **Code First** approach.
 
-However, you could use a **Model First** approach, by creating the same model using the tools and then generating a database from it.
+However, you can also use the **Model First** approach, create the same model using the tools, and then generate the database from it.
 
  ![Database First vs. Model First](./images/Database-First-vs.-Model-First.png?raw=true "Database First vs. Model First")
  
 _Database First vs. Model First_
 
-After generating the Model, you will make the proper adjustments in the StoreController to provide the Store Views with the data taken from the database instead of hard-coded one. You will not need to make any change to the View templates because the StoreController will be returning to the View templates the same ViewModels as before, although this time the data will come from the database.
+After generating the Model, you will make the proper adjustments in the StoreController to provide the Store Views with the data taken from the database, instead of using hard-coded data. You will not need to make any change to the View templates because the StoreController will be returning the same ViewModels to the View templates, although this time the data will come from the database.
 
 **The Code First Approach**
 
 The Code First approach allows us to define the model from the code without generating classes that are generally coupled with the framework.
 
-In code first, Model objects are defined with POCOs , "Plain Old CLR Objects". POCOs are defined as simple plain classes that have no inheritance and do not implement interfaces. We can automatically generate the database from them, or we can use an existing database and generate the class mapping from the code.
+In code first, model objects are defined with POCOs , "Plain Old CLR Objects". POCOs are simple plain classes that have no inheritance and do not implement interfaces. We can automatically generate the database from them, or we can use an existing database and generate the class mapping from the code.
 
-The benefit of using this approach is that the Model remains independent from the persistence framework (in this case, Entity Framework), as the POCOs classes are not coupled with the mapping framework.
-
-> **Note:** Although that this Hands-on Lab will cover the use of the free SQL Server Express, the code will also work with the full version of SQL Server.
+The benefits of using this approach is that the Model remains independent from the persistence framework (in this case, Entity Framework), as the POCOs classes are not coupled with the mapping framework.
 
 This Lab is based on ASP.NET MVC 4.
 
@@ -92,7 +91,7 @@ Please follow these steps to downloads and install Microsoft Visual Studio 11 Ex
 <a name="Exercises" />
 ## Exercises ##
 
-This Hands-On Lab is comprised by the following exercises:
+This Hands-on Lab is comprised by the following exercises:
 
 1. [Exercise 1: Adding a Database](#Exercise1)
 
@@ -110,7 +109,7 @@ Estimated time to complete this lab: **35 minutes**.
 <a name="Exercise1" />
 ### Exercise 1: Adding a Database ###
 
-In this exercise, you will learn how to add a database with the tables of the MusicStore application to the solution in order to consume its data. Once adding the database and generating the Model it will represent, you will make the proper adjustments in the StoreController class to provide the View template with the data taken from the database instead of hard-coded one.
+In this exercise, you will learn how to add a database with the tables of the MusicStore application to the solution in order to consume its data. Once the database is generated with the model, and added to the solution, you will modify the StoreController class to provide the View template with the data taken from the database, instead of using hard-coded values.
 
 <a name="Ex1Task1" />
 #### Task 1 - Adding a Database ####
@@ -133,13 +132,13 @@ In this exercise, you will learn how to add a database with the tables of the Mu
 	
 	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
 
-1. Add an **App_Data** folder to the project to hold the SQL Server Express database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
+1. Add an **App_Data** folder to the project to hold the database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
 
  	![Adding an AppData folder](./images/Adding-an-AppData-folder.png?raw=true "Adding an AppData folder")
  
 	_Adding an App_Data folder_
 
-1. Add **MvcMusicStore** database file. In this hands-On Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
+1. Add **MvcMusicStore** database file. In this Hands-on Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
 
  	![Adding an Existing Item](./images/Adding-an-Existing-Item.png?raw=true "Adding an Existing Item")
  
@@ -155,7 +154,7 @@ In this exercise, you will learn how to add a database with the tables of the Mu
  
 	_MvcMusicStore database in Solution Explorer_
 
-1. Verify the connection to the database. To do this, double-click the **MvcMusicStore.mdf**. The connection is established.
+1. Verify the connection to the database. To do this, double-click **MvcMusicStore.mdf** to establish a connection.
 
  	![Connecting to MvcMusicStore.mdf](./images/Connecting-to-MvcMusicStore.mdf.png?raw=true "Connecting to MvcMusicStore.mdf")
  
@@ -167,31 +166,31 @@ In this exercise, you will learn how to add a database with the tables of the Mu
 
 In this task, you will create a data model to interact with the database added in the previous task. 
 
-1. Create a data model that will represent the added database. To do this, in Solution Explorer right-click the **Models** folder, point to **Add** and then click **New Item**. In the **Add New Item** dialog, select the **Data** template and then the **ADO.NET Entity Data Model** item. Change the data model name to **StoreDB.edmx** and click **Add**.
+1. Create a data model that will represent the database. To do this, in Solution Explorer right-click the **Models** folder, point to **Add** and then click **New Item**. In the **Add New Item** dialog, select the **Data** template and then the **ADO.NET Entity Data Model** item. Change the data model name to **StoreDB.edmx** and click **Add**.
 
  	![Adding the StoreDB ADO.NET Entity Data Model](./images/Adding-the-StoreDB-ADO.NET-Entity-Data-Model.png?raw=true "Adding the StoreDB ADO.NET Entity Data Model")
  
 	_Adding the StoreDB ADO.NET Entity Data Model_
 
-1. The **Entity Data Model Wizard** appears. This wizard will guide you through the creation of the model layer. Since the model should be created based on the existing database added in the last task, select **Generate from database** and click **Next**.
+1. The **Entity Data Model Wizard** will appear. This wizard will guide you through the creation of the model layer. Since the model should be created based on the existing database recentyl added, select **Generate from database** and click **Next**.
 
  	![Choosing the model content](./images/Choosing-the-model-content.png?raw=true "Choosing the model content")
  
 	_Choosing the model content_
 
-1. Since you are generating a model from a database, you will need to specify which database to use. This should be done by selecting the database **MvcMusicStore.mdf** from the dropdown, so it fills in the correct connection information for that database. The generated class will have the same name as the entity connection string, so change it to **MusicStoreEntities** and click **Next**.
+1. Since you are generating a model from a database, you will need to specify which database to use. Select the database **MvcMusicStore.mdf** from the dropdown to retrieve the correct connection information for that database. The generated class should have the same name as the entity connection string, so change its name to **MusicStoreEntities** and click **Next**.
 
  	![Choosing the data connection](./images/Choosing-the-data-connection.png?raw=true "Choosing the data connection")
  
 	_Choosing the data connection_
 
-1. Choose the database objects to use. Since the Entity Model will use just the database's tables, check the **Tables** checkbox and make sure that the **Include foreign key columns in the model** and **Pluralize or singularize generated object names** checkboxes are also checked. Change the Model Namespace to **MvcMusicStoreModel** and click **Finish**.
+1. Choose the database objects to use. As the Entity Model will use just the database's tables, select the **Tables** option, and make sure that the **Include foreign key columns in the model** and **Pluralize or singularize generated object names** options are also selected. Change the Model Namespace to **MvcMusicStoreModel** and click **Finish**.
 
  	![Choosing the database objects](./images/Choosing-the-database-objects.png?raw=true "Choosing the database objects")
  
 	_Choosing the database objects_
 
-1. An entity diagram for the database appears. A separate class that maps to each table within the database will be created. For example, the **Albums** table will be represented by an **Album** class with each column in the table mapping to a property on the class. This will allow you to query and work with objects that represent rows within the database. You will see other classes that you might not use in the Hands-on Lab but belong to the Music Store application.
+1. An entity diagram for the database will appear, while a separate class that maps each table to the database will be created. For example, the **Albums** table will be represented by an **Album** class, where each column in the table will map to a class property. This will allow you to query and work with objects that represent rows in the database. You will also see other classes that you might not use in this Hands-on Lab, but belong to the Music Store application.
 
  	![Entity diagram](./images/Entity-diagram.png?raw=true "Entity diagram")
  
@@ -201,7 +200,7 @@ In this task, you will create a data model to interact with the database added i
 <a name="Ex1Task3" />
 #### Task 3 - Building the Application ####
 
-In this task, you will check that although you have removed the **Album** and **Genre** model classes, the project gets built successfully, by using the classes in the data model. 
+In this task, you will check that, although you have removed the **Album** and **Genre** model classes, the project builds successfully by using data model classes. 
 
 1. Delete the placeholder **Album** and **Genre** classes. To do this, in the **Solution Explorer**, expand the **Models** folder, right-click **Album** and select **Delete**. Repeat this procedure with the **Genre** class.
 
@@ -215,7 +214,7 @@ In this task, you will check that although you have removed the **Album** and **
  
 	_Building the project_
 
-1. The project builds successfully. Why does still work? It works because the database tables have fields which include the properties you were using in the earlier **Album** and **Genre** classes manually removed. Data model classes are a drop-in replacement.
+1. The project builds successfully. Why does it still work? It works because the database tables have fields that include the properties that you were using in the removed classes **Album** and **Genre**.
 
  	![Builds succeeded](./images/Builds-succeeded.png?raw=true "Builds succeeded")
  
@@ -231,7 +230,7 @@ In this task, you will check that although you have removed the **Album** and **
 <a name="Ex1Task4" />
 #### Task 4 - Querying the Database ####
 
-In this task, you will update the StoreController class so that instead of using hard-coded data, it queries the database to retrieve all its information. 
+In this task, you will update the StoreController class so that, instead of using hardcoded data, it will query the database to retrieve the information. 
 
 1. Open **Controllers\StoreController.cs** and add the following field to the class to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
@@ -244,7 +243,7 @@ In this task, you will update the StoreController class so that instead of using
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action method to retrieve all **Genre** names in the database. This was done previously by hard-coding string data. Now you can instead write a LINQ query expression like below which retrieves the **Name** property of each Genre within the database:
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action method to retrieve all the **Genre** names. Before this update, a string was hardcoded instead. Now you can write a LINQ query expression, like the one below, which retrieves the **Name** property of each Genre:
 
 	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 Store Index_)
 
@@ -293,11 +292,11 @@ In this task, you will update the StoreController class so that instead of using
 <a name="Ex1Task5" />
 #### Task 5 - Running the Application ####
 
-In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hard-coded ones. There is no need of changing the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, although this time the data will come from the database. 
+In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hardcoded ones. There is no need to change the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, although this time the data will come from the database. 
 
 1. Press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer the hard-coded list, else the ones taken from the database.
+1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer a hardcoded list, and the data is directly retrieved from the database.
 
 	![BrowsingGenresFromDataBase](images/browsinggenresfromdatabase.png?raw=true)
 
@@ -307,11 +306,13 @@ In this task, you will check that the Store Index page will now display the Genr
 <a name="Exercise2" />
 ### Exercise 2: Adding a Database Using Code First ###
 
-In this exercise, you will learn how to use the Code First approach to add a database with the tables of the MusicStore application to consume its data.
+In this exercise, you will learn how to use the Code First approach to create a database with the tables of the MusicStore application, and how to access its data.
 
-Once adding the database and generating the model, you will make the proper adjustments in the StoreController to provide the View template with the data taken from the database instead of hardcoding it.
+Once the model is generated, you will modify the StoreController to provide the View template with the data taken from the database, instead of using hardcoded values.
 
-> **Note:** If you have completed Exercise 1 and have already worked with Database approach, you will now learn how to get the same results with a different process. Some tasks will be repeated with Exercise 1, so they are marked appropriately to make your reading easier. If you have not completed Exercise 1 but would like to learn the Code First approach, you can start from this exercise and get a full coverage of the topic.
+> **Note:** If you have completed Exercise 1 and have already worked with the Database First approach, you will now learn how to get the same results with a different process. The tasks that are in common with Exercise 1 have been marked to make your reading easier. 
+>If you have not completed Exercise 1 but would like to learn the Code First approach, you can start from this exercise and get a full coverage of the topic.
+
 
 <a name="Ex2Task1" />
 #### Task 1 - Adding a Database ####
@@ -338,7 +339,7 @@ In this task, you will add an already created database with the main tables of t
 	
 	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
 
-1. Add an **App_Data** folder to the project to hold the SQL Server Express database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
+1. Add an **App_Data** folder to the project to hold the database file. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
 
  	![Adding an AppData folder](./images/Adding-an-AppData-folder.png?raw=true "Adding an AppData folder")
  
@@ -360,13 +361,13 @@ In this task, you will add an already created database with the main tables of t
  
 	_MvcMusicStore database in Solution Explorer_
 
-1. Verify the connection to the database. To do this, open the **Database Explorer** (CTRL+ALT+S), and then double-click the **MvcMusicStore.mdf**. The connection is established.
+1. Verify the connection to the database. To do this, open the **Database Explorer** (CTRL+ALT+S), double-click **MvcMusicStore.mdf** and make sure the connection is established.
 
  	![Connecting to MvcMusicStore.mdf](./images/Connecting-to-MvcMusicStore.mdf.png?raw=true "Connecting to MvcMusicStore.mdf")
  
 	_Connecting to MvcMusicStore.mdf_
 
-1. Close the connection now. To do that, in Database Explorer right-click on the MvcMusicStore database and select **Close Connection**.
+1. Close the connection now. To do that, in Database Explorer right-click the MvcMusicStore database and select **Close Connection**.
 
  	![Closing the connection](./images/Closing-the-connection.png?raw=true "Closing the connection")
  
@@ -376,7 +377,7 @@ In this task, you will add an already created database with the main tables of t
 <a name="Ex2Task2" />
 #### Task 2 - Configuring the connection to the Database ####
 
-Now that we have already added a database to our project, we will write in the Web.config the connection string.
+Now that you have already added a database to our project, you will write in the **Web.config** file the connection string.
 
 1. Add a connection string at **Web.config**. To do that, open **Web.config** at project root and replace the connection string named DefaultConnection with this line in the **&lt;connectionStrings&gt;** section:
 
@@ -399,13 +400,12 @@ Now that we have already added a database to our project, we will write in the W
 <a name="Ex2Task3" />
 #### Task 3 - Working with the Model ####
 
-Now that we have already configured the connection to the database, we will link the model with the database tables. In this task, we will create a class that will be linked to the database with Code First. Remember we already have a POCO model class that should be modified.
+Now that you have already configured the connection to the database, you will link the model with the database tables. In this task, you will create a class that will be linked to the database with Code First. Remember that there is an existent POCO model class that should be modified.
 
 > **Note:** If you completed Exercise 1, you will note that this step was performed by a wizard. By doing Code First, you will manually create classes that will be linked to data entities.
 
 
-
-1. Open the POCO model class **Genre** from **Models** project folder and include an ID, a description attribute, and also an album's collection.
+1. Open the POCO model class **Genre** from **Models** project folder and include an ID, a description attribute, and also an album collection.
 
 	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Genre_)
 
@@ -428,7 +428,7 @@ Now that we have already configured the connection to the database, we will link
 	}
 	````
 
-	> **Note:** To work with Code First conventions, Genre must have a primary key property that will be automatically detected.
+	> **Note:** To work with Code First conventions, the class Genre must have a primary key property that will be automatically detected.
 
 	> You can read more about Code First Conventions in this [msdn article](http://msdn.microsoft.com/en-us/library/hh161541&#040;v=vs.103&#041;.aspx).
 
@@ -454,7 +454,7 @@ Now that we have already configured the connection to the database, we will link
 	}
 	````
 
-1. Right-click the **Models** project folder point to **Add** and then click **New Item**. Under **Code** choose the **Class** item and name it **MusicStoreEntities.cs**, then click **Add.**
+1. Right-click the **Models** project folder and select **Add* | New Item**. Under **Code**, choose the **Class** item and name it **MusicStoreEntities.cs**. Then, click **Add.**
 
 	![Adding a class](./images/Adding-a-class.png?raw=true "Adding a class")
 
@@ -513,19 +513,19 @@ Now that we have already configured the connection to the database, we will link
 	}
 	````
 
-	> **Note:** With Entity Framework **DbContext** and **DBSet** you will be able to query the POCO class Genre. By extending OnModelCreating we are specifying in the **code** how Genre will be mapped to a database table. You can find more information about DBContext and DBSet in this msdn article: [link](http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext&#040;v=vs.103&#041;.aspx)
+	> **Note:** With Entity Framework **DbContext** and **DBSet** you will be able to query the POCO class Genre. By extending **OnModelCreating** method, you are specifying in the **code** how Genre will be mapped to a database table. You can find more information about DBContext and DBSet in this msdn article: [link](http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext&#040;v=vs.103&#041;.aspx)
 
-	> **Note:** By default, entity framework will try to create the database, in order to avoid that, we configure the database initializer in the **MusicStoreEntities** constructor to a null value. This way, no database initialization will be executed.
+	> **Note:** By default, entity framework will try to create the database. In order to avoid that, you will configure the database initializer in the **MusicStoreEntities** constructor to a null value to prevent the database initialization.
 
  
 <a name="Ex2Task4" />
 #### Task 4 - Querying the Database ####
 
-In this task, you will update the StoreController class so that instead of using hard-coded data, it can consume it from the database.
+In this task, you will update the StoreController class so that, instead of using hardcoded data, it will retrieve it from the database.
 
 > **Note:** This task is in common with Exercise 1.
 
-> If you completed Exercise 1 you will note these steps are the same, independently from the approach (Database first or Code first). They are different in how the data is linked with the model, but the access to data entities has to be the transparent from the controller.
+> If you completed Exercise 1 you will note these steps are the same in both approaches (Database first or Code first). They are different in how the data is linked with the model, but the access to data entities is yet transparent from the controller.
 
 1. Open **Controllers\StoreController.cs** and add the following field to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
@@ -538,7 +538,7 @@ In this task, you will update the StoreController class so that instead of using
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action to retrieve all **Genre** names in the database. This was done previously by hard-coding string data. Now you can instead write a LINQ query expression like the one below which retrieves the **Name** property of each Genre within the database:
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action to retrieve all **Genre** names in the database. Before this, the genres were hardcoded. Now you will write a LINQ query expression, like the one below, which retrieves the **Name** property of each Genre from the database:
 
 	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 code First Store Index_)
 
@@ -588,11 +588,11 @@ In this task, you will update the StoreController class so that instead of using
 <a name="Ex2Task5" />
 #### Task 5 - Running the Application ####
 
-In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hard-coded ones. There is no need of changing the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, although this time the data will come from the database. 
+In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hardcoded ones. There is no need to change the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, but this time the data will come from the database. 
 
-1. Press **F5** to run the Application.
+1. Press **F5** to run the application.
 
-1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer the hard-coded list, else the ones taken from the database.
+1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer the hardcoded list.
 
 	![browsinggenresfromdatabase](images/browsinggenresfromdatabase.png?raw=true)
 
@@ -602,7 +602,7 @@ In this task, you will check that the Store Index page will now display the Genr
 <a name="Exercise3" />
 ### Exercise 3: Querying the Database with Parameters ###
 
- In this exercise, you will learn how to query the database using parameters and how to use the Query Result Shaping, a feature that reduces the number of accesses to the database to retrieve data in a more efficient way.
+ In this exercise, you will learn how to query the database using parameters, and how to use Query Result Shaping, a feature that reduces the number database accesses retrieving data in a more efficient way.
 
 > **Note:** For further information on Query Result Shaping, visit the following [msdn article](http://msdn.microsoft.com/en-us/library/bb896272&#040;v=vs.100&#041;.aspx).
 
@@ -667,11 +667,11 @@ In this task, you will change the **StoreController** class to access the databa
 <a name="Ex3Task2" />
 #### Task 2 - Running the Application ####
 
-In this task, you will try out the Application in a web browser and obtain albums for a specific genre from the database.
+In this task, you will run the application and retrieve albums of a specific genre from the database.
 
 1. Press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store/Browse?genre=Jazz** to verify that the results are being pulled from the database.
+1. The project starts in the Home page. Change the URL to **/Store/Browse?genre=Jazz** to verify that the results are being retrieved from the database.
 
  	![Browsing StoreBrowsegenre=Jazz](./images/Browsing-StoreBrowsegenre=Jazz.png?raw=true "Browsing StoreBrowsegenre=Jazz")
  
@@ -681,7 +681,7 @@ In this task, you will try out the Application in a web browser and obtain album
 <a name="Ex3Task3" />
 #### Task 3 - Accessing Albums by Id ####
 
-In this task, you will repeat the previous procedure, in this case, to obtain albums by Id.
+In this task, you will repeat the previous procedure to get albums by their Id.
 
 1. Close the browser if needed, to return to Visual Studio. Open the **StoreController** class to change the **Details** action method. To do this, in the **Solution Explorer**, expand the **Controllers** folder and double-click **StoreController.cs**.
 
@@ -705,11 +705,11 @@ In this task, you will repeat the previous procedure, in this case, to obtain al
 <a name="Ex3Task4" />
 #### Task 4 - Running the Application ####
 
-In this task, you will try out the Application in a web browser and obtain album details based on its Id.
+In this task, you will run the Application in a web browser and obtain album details by their Id.
 
 1. Press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store/Details/500** to verify that the results are being pulled from the database.
+1. The project starts in the Home page. Change the URL to **/Store/Details/500** to verify that the results are being retrieved from the database.
 
  	![Browsing StoreDetails500](./images/Browsing-StoreDetails500.png?raw=true "Browsing StoreDetails500")
  
@@ -828,7 +828,7 @@ to query the database asynchronously.
 <a name="Summary" />
 ## Summary ##
 
-By completing this Hands-On Lab you have learned the fundamentals of ASP.NET MVC Models and Data Access, using a **Database First** approach:
+By completing this Hands-on Lab you have learned the fundamentals of ASP.NET MVC Models and Data Access, using the **Database First** approach as well as the **Code First Approach**:
 
 - How to add a database to the solution in order to consume its data
 
@@ -836,7 +836,7 @@ By completing this Hands-On Lab you have learned the fundamentals of ASP.NET MVC
 
 - How to query the database using parameters
 
-- How to use the Query Result Shaping, a feature that reduces the number of accesses to the database to retrieve data in a more efficient way
+- How to use the Query Result Shaping, a feature that reduces the number of database accesses, retrieving data in a more efficient way
 
 - How to use both Database First and Code First approaches in Microsoft Entity Framework to link the database with the model
 
