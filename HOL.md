@@ -1,4 +1,4 @@
-﻿<a name="HOLName" />
+﻿<a name="HOLTop" />
 
 # ASP.NET MVC 4 Models and Data Access #
 ---
@@ -86,8 +86,6 @@ Please follow these steps to downloads and install Microsoft Visual Studio 11 Ex
  	![Web Platform Installer](./images/Web-Platform-Installer.png?raw=true "Web Platform Installer")
  
 	_Web Platform Installer_
-
-1. Finally the Web Platform Installer shows the installed products. Click **Finish** to finish the setup process.
 
 ---
 
@@ -388,7 +386,8 @@ Now that we have already added a database to our project, we will write in the W
 
 	<!-- mark:3-3 -->
 	````XML
-	</configuration>
+	<configuration>
+	...
 	  <connectionStrings>
 		<add name="MusicStoreEntities" connectionString="data source=(LocalDb)\v11.0;initial catalog=MvcMusicStore;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\MvcMusicStore.mdf" providerName="System.Data.SqlClient" />
 	  </connectionStrings>
@@ -478,7 +477,7 @@ Now that we have already configured the connection to the database, we will link
 	...
 	````
 
-1. Replace the class declaration to extend DbContext class: declare a public DBSet and override the method OnModelCreating. After this step you will get a domain class that will link your model with the Entity Framework. In order to do that, replace the class code with the following:
+1. Replace the class declaration to extend the **DbContext** class: declare a public **DBSet** and override **OnModelCreating** method. After this step you will get a domain class that will link your model with the Entity Framework. In order to do that, replace the class code with the following:
 
 	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First MusicStoreEntities_)
 
