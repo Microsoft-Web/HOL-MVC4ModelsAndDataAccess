@@ -29,62 +29,20 @@ In code first, model objects are defined with POCOs , "Plain Old CLR Objects". P
 
 The benefits of using this approach is that the Model remains independent from the persistence framework (in this case, Entity Framework), as the POCOs classes are not coupled with the mapping framework.
 
-This Lab is based on ASP.NET MVC 4.
+> **Note:** This Lab is based on ASP.NET MVC 4 and a version of the Music Store sample application customized and minimized to fit only the features shown in this Hands-On Lab.
 
-If you wish to explore the whole Music Store tutorial application you can find it in [http://mvcmusicstore.codeplex.com/](http://mvcmusicstore.codeplex.com/).
+> If you wish to explore the whole **Music Store** tutorial application you can find it in [http://mvcmusicstore.codeplex.com/](http://mvcmusicstore.codeplex.com/).
 
- 
 <a name="SystemRequirements" />
 ### System Requirements ###
 
 You must have the following items to complete this lab:
 
-- Visual Studio 11 Express Beta for Web
+- [Microsoft Visual Studio Express 2012 for Web](http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-web) or superior (read [Appendix A](#AppendixA) for instructions on how to install it).
 
-<a name="Setup" />
-### Setup ###
+### Installing Code Snippets ###
 
-#### Installing Code Snippets####
-For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run the **.\Source\Assets\CodeSnippets.vsi** file.
-
-####Installing Web Platform Installer####
-This section assumes that you don't have some or all the system requirements installed. In case you do, you can simply skip this section.
-
-Microsoft Web Platform Installer (WebPI) is a tool that manages the installation of the prerequisites for this Lab.
-
-> **Note:** As well as the Microsoft Web Platform, WebPI can also install many of the open source applications that are available like Umbraco, Kentico, DotNetNuke and many more.  These are very useful for providing a foundation from which to customize an application to your requirements, dramatically cutting down your development time.
-
-Please follow these steps to downloads and install Microsoft Visual Studio 11 Express Beta for Web:
-
-1. Install **Visual Studio 11 Express Beta for Web**. To do this, Navigate to [http://www.microsoft.com/web/gallery/install.aspx?appid=VWD11_BETA&prerelease=true](http://www.microsoft.com/web/gallery/install.aspx?appid=VWD11_BETA&prerelease=true) using a web browser. 
-
-	![Web Platform Installer 4.0 window](./images/Microsoft-Web-Platform-Installer-4.png?raw=true "Web Platform Installer 4.0 download")
-
-	_Web Platform Installer 4.0 download_
-
-1. The Web Platform Installer launches and shows Visual Studio 11 Express Beta for Web Installation. Click on **Install**.
-
- 	![Visual Studio 11 Express Beta for Web Installer window](./images/Microsoft-VS-11-Install.png?raw=true "Visual Studio 11 Express Beta for Web Installer window")
- 
-	_Visual Studio 11 Express Beta for Web Installer window_
-
-1. The **Web Platform Installer** displays the list of software to be installed. Accept by clicking **I Accept**.
-
- 	![Web Platform Installer window](./images/Microsoft-Web-Platform-Installer-Prerequisites.png?raw=true "Web Platform Installer window")
- 
-	_Web Platform Installer window_
-
-1. The appropriate components will be downloaded and installed.
-
- 	![Web Platform Installation - Download progress](./images/Web-Platform-Installation-Download-progress.png?raw=true "Web Platform Installation - Download progress")
- 
-	_Web Platform Installation - Download progress_
-
-1. The **Web Platform Installer** will resume downloading and installing the products. When this process is finished, the Installer will show the list of all the software installed. Click **Finish**.
-
- 	![Web Platform Installer](./images/Web-Platform-Installer.png?raw=true "Web Platform Installer")
- 
-	_Web Platform Installer_
+For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Setup\CodeSnippets.vsi** file.
 
 ---
 
@@ -114,29 +72,15 @@ In this exercise, you will learn how to add a database with the tables of the Mu
 <a name="Ex1Task1" />
 #### Task 1 - Adding a Database ####
 
-1. In this task, you will add an already created database with the main tables of the MusicStore application to the solution. Start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
+In this task, you will add an already created database with the main tables of the MusicStore application to the solution. 
 
-1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex01-AddingADatabaseDBFirst\Begin, select **MvcMusicStore.sln** and click **Open**.
+1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex1-Begin.sln** solution located in the **Source\Ex1-AddingADatabaseDBFirst\Begin** folder of this lab.
 
-1.	Follow these steps to install the **NuGet** package dependencies.
+1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
 
-	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
+1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
-	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
-
-	c.	After installing the package, type **Enable-PackageRestore**.
-
-	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
-
-	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
-	
-	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
-
-1. Add an **App_Data** folder to the project to hold the database files. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
-
- 	![Adding an AppData folder](./images/Adding-an-AppData-folder.png?raw=true "Adding an AppData folder")
- 
-	_Adding an App_Data folder_
+1. Build the solution by clicking **Build** | **Build Solution**.
 
 1. Add **MvcMusicStore** database file. In this Hands-on Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
 
@@ -178,37 +122,50 @@ In this task, you will create a data model to interact with the database added i
  
 	_Choosing the model content_
 
-1. Since you are generating a model from a database, you will need to specify which database to use. Select the database **MvcMusicStore.mdf** from the dropdown to retrieve the correct connection information for that database. The generated class should have the same name as the entity connection string, so change its name to **MusicStoreEntities** and click **Next**.
+1. Since you are generating a model from a database, you will need to specify the connection to use. Click **New Connection**.
+
+
+1. Select **Microsoft SQL Server Database File** and click **Continue**.
+
+	![Choose data source](images/choose-data-source.png?raw=true "Choose data source")
+
+	_Choose data source_
+
+1. Click **Browse** and select the database **MvcMusicStore.mdf** you located in the **App_Data** folder and click **OK**.
+
+	![Connection properties](images/connection-properties.png?raw=true "Connection properties")
+
+	_Connection properties_
+
+1. The generated class should have the same name as the entity connection string, so change its name to **MusicStoreEntities** and click **Next**.
 
  	![Choosing the data connection](./images/Choosing-the-data-connection.png?raw=true "Choosing the data connection")
  
 	_Choosing the data connection_
 
-1. Choose the database objects to use. As the Entity Model will use just the database's tables, select the **Tables** option, and make sure that the **Include foreign key columns in the model** and **Pluralize or singularize generated object names** options are also selected. Change the Model Namespace to **MvcMusicStoreModel** and click **Finish**.
+1. Choose the database objects to use. As the Entity Model will use just the database's tables, select the **Tables** option, and make sure that the **Include foreign key columns in the model** and **Pluralize or singularize generated object names** options are also selected. Change the Model Namespace to **MvcMusicStore.Model** and click **Finish**.
 
  	![Choosing the database objects](./images/Choosing-the-database-objects.png?raw=true "Choosing the database objects")
  
 	_Choosing the database objects_
 
-1. An entity diagram for the database will appear, while a separate class that maps each table to the database will be created. For example, the **Albums** table will be represented by an **Album** class, where each column in the table will map to a class property. This will allow you to query and work with objects that represent rows in the database. You will also see other classes that you might not use in this Hands-on Lab, but belong to the Music Store application.
+	> **Note:** If a Security Warning dialog is shown, click **OK** to run the template and generate the classes for the model entities.
+
+1. An entity diagram for the database will appear, while a separate class that maps each table to the database will be created. For example, the **Albums** table will be represented by an **Album** class, where each column in the table will map to a class property. This will allow you to query and work with objects that represent rows in the database.
 
  	![Entity diagram](./images/Entity-diagram.png?raw=true "Entity diagram")
  
 	_Entity diagram_
 
+> **Note:** The T4 templates (.tt) run code to generate the entities classes and will overwrite the existing classes with the same name. In this example, the classes "Album", "Genre" and "Artist" were overwritten with the generated code.
+
  
 <a name="Ex1Task3" />
 #### Task 3 - Building the Application ####
 
-In this task, you will check that, although you have removed the **Album** and **Genre** model classes, the project builds successfully by using data model classes. 
+In this task, you will check that, although the model generation have removed the **Album**, **Genre** and **Artist** model classes, the project builds successfully by using the new data model classes. 
 
-1. Delete the placeholder **Album** and **Genre** classes. To do this, in the **Solution Explorer**, expand the **Models** folder, right-click **Album** and select **Delete**. Repeat this procedure with the **Genre** class.
-
- 	![Deleting placeholder classes](./images/Deleting-placeholder-classes.png?raw=true "Deleting placeholder classes")
- 
-	_Deleting placeholder classes_
-
-1. Build the project by selecting the **Debug** menu item and then **Build MvcMusicStore**.
+1. Build the project by selecting the **Build** menu item and then **Build MvcMusicStore**.
 
  	![Building the project](./images/Building-the-project.png?raw=true "Building the project")
  
@@ -220,11 +177,11 @@ In this task, you will check that, although you have removed the **Album** and *
  
 	_Builds succeeded_
 
-1. While the designer displays the entities in a diagram format, they are really C# classes. Expand the **StoreDB.edmx** node in the Solution Explorer, and you will see a file called **StoreDB.Designer.cs**.
+1. While the designer displays the entities in a diagram format, they are really C# classes. Expand the **StoreDB.edmx** node in the Solution Explorer and then **StoreDB.tt**, you will see the new generated entities.
 
- 	![StoreDB.Designer.cs file](./images/StoreDB.Designer.cs-file.png?raw=true "StoreDB.Designer.cs file")
+ 	![Generated files](./images/StoreDB.Designer.cs-file.png?raw=true "Generated files")
  
-	_StoreDB.Designer.cs file_
+	_Generated files_
 
  
 <a name="Ex1Task4" />
@@ -234,7 +191,7 @@ In this task, you will update the StoreController class so that, instead of usin
 
 1. Open **Controllers\StoreController.cs** and add the following field to the class to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 storeDB_)
+	(Code Snippet - _Models And Data Access - Ex1 storeDB_)
 
 	<!-- mark:3-4 -->
 	````C#
@@ -243,22 +200,39 @@ In this task, you will update the StoreController class so that, instead of usin
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action method to retrieve all the **Genre** names. Before this update, a string was hardcoded instead. Now you can write a LINQ query expression, like the one below, which retrieves the **Name** property of each Genre:
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Details** action method to retrieve album details. Before this update, the values were hardcoded instead.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 Store Index_)
+	(Code Snippet - _Models And Data Access - Ex1 Store Details_)
 
-	<!-- mark:6-9 -->
+	<!-- mark:4 -->
 	````C#
-	//
 	// GET: /Store/
-	
-	public ActionResult Index()
+	public ActionResult Details(int id)
 	{
-	    // Retrieve the list of genres
-	    var genres = from genre in storeDB.Genres
-	                 select genre.Name;
-	
-	    // Create your view model
+		 var album = this.storeDB.Albums.Find(id);
+
+		 if (album == null)
+		 {
+			  return this.HttpNotFound();
+		 }
+
+		 return this.View(album);
+	}
+	````
+
+1. Update **Browse** action method to retrieve the requested **Genre** with all of its **Albums**. To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+
+	(Code Snippet - _Models And Data Access - Ex1 Store Browse_)
+
+	<!-- mark:4-5 -->
+	````C#
+	public ActionResult Browse(string genre)
+	{
+		 // Retrieve Genre and its Associated Albums from database
+		 var genreModel = this.storeDB.Genres.Include("Albums")
+			  .Single(g => g.Name == genre);
+
+		 return this.View(genreModel);
 	}
 	````
 
@@ -266,42 +240,54 @@ In this task, you will update the StoreController class so that, instead of usin
 
 	> For more information about LINQ, please visit the [msdn site](http://msdn.microsoft.com/en-us/library/bb397926&#040;v=vs.110&#041;.aspx).
 
-1. Transform the collection of genres to a list. To do this, replace the following code:
+1. Update **Index** action method to retrieve all the genres.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex1 Store Index ToList_)
+	(Code Snippet - _Models And Data Access - Ex1 Store Index_)
 
-	<!-- mark:10-12 -->
+	<!-- mark:3 -->
 	````C#
 	public ActionResult Index()
 	{
-	    // Retrieve the list of genres
-	    var genres = from genre in storeDB.Genres
-	                 select genre.Name;
-	
-	    // Create your view model
-	    var viewModel = new StoreIndexViewModel
-	    {
-	        Genres = genres.ToList(),
-	        NumberOfGenres = genres.Count()
-	    };
-	
-	    return View(viewModel);
+		 var genres = this.storeDB.Genres;
+
+		 return this.View(genres);
+	}
+	````
+
+1. Update **Index** action method to retrieve all the genres and transform the collection to a list.
+
+	(Code Snippet - _Models And Data Access - Ex1 Store GenreMenu_)
+
+	<!-- mark:5 -->
+	````C#
+	// GET: /Store/GenreMenu
+	[ChildActionOnly]
+	public ActionResult GenreMenu()
+	{
+		 var genres = this.storeDB.Genres.ToList();
+
+		 return this.PartialView(genres);
 	}
 	````
  
 <a name="Ex1Task5" />
 #### Task 5 - Running the Application ####
 
-In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hardcoded ones. There is no need to change the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, although this time the data will come from the database. 
+In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hardcoded ones. There is no need to change the View template because the **StoreController** is returning the same entities as before, although this time the data will come from the database. 
 
-1. Press **F5** to run the Application.
+1. Rebuild the solution and press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer a hardcoded list, and the data is directly retrieved from the database.
+1. The project starts in the Home page. Verify that the menu of **Genres** is no longer a hardcoded list, and the data is directly retrieved from the database.
 
 	![BrowsingGenresFromDataBase](images/browsinggenresfromdatabase.png?raw=true)
 
 	_Browsing Genres from the database_
- 
+
+1. Now browse to any genre and verify the albums are populated from database.
+
+	![Browsing Albums from the database](images/browsing-albums-from-the-database.png?raw=true "Browsing Albums from the database")
+
+	_Browsing Albums from the database_
 
 <a name="Exercise2" />
 ### Exercise 2: Adding a Database Using Code First ###
@@ -407,7 +393,7 @@ Now that you have already configured the connection to the database, you will li
 
 1. Open the POCO model class **Genre** from **Models** project folder and include an ID, a description attribute, and also an album collection.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Genre_)
+	(Code Snippet - _Models And Data Access - Ex2 Code First Genre_)
 
 	<!-- mark:10,12-14 -->
 	````C#
@@ -434,7 +420,7 @@ Now that you have already configured the connection to the database, you will li
 
 1. Now, open the POCO model class **Album** from **Models** project folder and include the AlbumId and GenreId properties.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Album_)
+	(Code Snippet - _Models And Data Access - Ex2 Code First Album_)
 	<!-- mark:10,12 -->
 	````C#
 	using System;
@@ -479,7 +465,7 @@ Now that you have already configured the connection to the database, you will li
 
 1. Replace the class declaration to extend the **DbContext** class: declare a public **DBSet** and override **OnModelCreating** method. After this step you will get a domain class that will link your model with the Entity Framework. In order to do that, replace the class code with the following:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First MusicStoreEntities_)
+	(Code Snippet - _Models And Data Access - Ex2 Code First MusicStoreEntities_)
 
 	<!-- mark:10-27 -->
 	````C#
@@ -529,7 +515,7 @@ In this task, you will update the StoreController class so that, instead of usin
 
 1. Open **Controllers\StoreController.cs** and add the following field to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First storeDB_)
+	(Code Snippet - _Models And Data Access - Ex2 Code First storeDB_)
 
 	<!-- mark:3-4 -->
 	````C#
@@ -540,7 +526,7 @@ In this task, you will update the StoreController class so that, instead of usin
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action to retrieve all **Genre** names in the database. Before this, the genres were hardcoded. Now you will write a LINQ query expression, like the one below, which retrieves the **Name** property of each Genre from the database:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 code First Store Index_)
+	(Code Snippet - _Models And Data Access - Ex2 code First Store Index_)
 
 	<!-- mark:6-9 -->
 	````C#
@@ -563,7 +549,7 @@ In this task, you will update the StoreController class so that, instead of usin
 
 1. Transform the collection of genres to a list. To do this, replace the following code:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex2 Code First Genres to List_)
+	(Code Snippet - _Models And Data Access - Ex2 Code First Genres to List_)
 
 	<!-- mark:10-12 -->
 	````C#
@@ -633,7 +619,7 @@ In this task, you will change the **StoreController** class to access the databa
 
 1. Change the **Browse** action method to retrieve albums for a specific genre. To do this, replace the following code:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex3 StoreController BrowseMethod_)
+	(Code Snippet - _Models And Data Access - Ex3 StoreController BrowseMethod_)
 
 	<!-- mark:6-16 -->
 	````C#
@@ -687,7 +673,7 @@ In this task, you will repeat the previous procedure to get albums by their Id.
 
 1. Change the **Details** action method to retrieve albums details based on their **Id**. To do this, replace the following code:
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex3 StoreController DetailsMethod_)
+	(Code Snippet - _Models And Data Access - Ex3 StoreController DetailsMethod_)
 	<!-- mark:6-7 -->
 	````C#
 	//
@@ -751,7 +737,7 @@ to query the database asynchronously.
 
 1. Add the following namespace declarations to import the types contained in **System.Collection.ObjectModel** and **System.Threading.Tasks** namespaces.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Namespace Declarations_)
+	(Code Snippet - _Models And Data Access - Ex4 Namespace Declarations_)
 
 	<!-- mark:1-2 -->
 	````C#
@@ -761,7 +747,7 @@ to query the database asynchronously.
 	
 1. In the **StoreController** class, locate the **Index** Action Method. Add the **async** keyword before the return type and make it return the type **Task\<ActionResult\>**.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Async method_)
+	(Code Snippet - _Models And Data Access - Ex4 Async method_)
 
 	<!-- mark:1 -->
 	````C#
@@ -772,7 +758,7 @@ to query the database asynchronously.
 
 1. In the **Index** method, replace the **genres** variable declaration with the following code.
 	
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 GenresDeclaration_)
+	(Code Snippet - _Models And Data Access - Ex4 GenresDeclaration_)
 
 	<!-- mark:1 -->
 	````C#	
@@ -781,7 +767,7 @@ to query the database asynchronously.
 
 1. Add a new **Task** for retreiving the genres' names using the **await** keyword before the task call. To do this, insert the highlighted code after the **genres** declaration.
 
-	(Code Snippet - _ASP.NET MVC 4 Models and Data Access - Ex4 Await Task_)
+	(Code Snippet - _Models And Data Access - Ex4 Await Task_)
 	
 	<!-- mark:5-10 -->
 	````C#
