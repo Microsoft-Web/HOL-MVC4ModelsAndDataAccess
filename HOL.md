@@ -305,31 +305,15 @@ Once the model is generated, you will modify the StoreController to provide the 
 
 In this task, you will add an already created database with the main tables of the MusicStore application to the solution.
 
-> **Note:** This task is in common with Exercise 1. 
+> **Note:** This task is in common with Exercise 1.
 
-1. Start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
+1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex2-Begin.sln** solution located in the **Source\Ex2-AddingADatabaseCodeFirst\Begin** folder of this lab.
 
-1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex02-AddingADatabaseCodeFirst\Begin, select **MvcMusicStore.sln** and click **Open**.
+1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
 
-1.	Follow these steps to install the **NuGet** package dependencies.
+1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
-	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
-
-	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
-
-	c.	After installing the package, type **Enable-PackageRestore**.
-
-	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
-
-	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
-	
-	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
-
-1. Add an **App_Data** folder to the project to hold the database file. **App_Data** is a special folder in ASP.NET which already has the correct security access permissions for database access. To add the folder, right-click **MvcMusicStore** project, point to **Add** then to **Add ASP.NET Folder** and finally click **App_Data**.
-
- 	![Adding an AppData folder](./images/Adding-an-AppData-folder.png?raw=true "Adding an AppData folder")
- 
-	_Adding an App_Data folder_
+1. Build the solution by clicking **Build** | **Build Solution**.
 
 1. Add **MvcMusicStore** database file. In this lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
 
@@ -371,7 +355,7 @@ Now that you have already added a database to our project, you will write in the
  
 	_Web.config file location_
 
-	<!-- mark:3-3 -->
+	<!-- mark:4 -->
 	````XML
 	<configuration>
 	...
@@ -391,26 +375,26 @@ Now that you have already configured the connection to the database, you will li
 > **Note:** If you completed Exercise 1, you will note that this step was performed by a wizard. By doing Code First, you will manually create classes that will be linked to data entities.
 
 
-1. Open the POCO model class **Genre** from **Models** project folder and include an ID, a description attribute, and also an album collection.
+1. Open the POCO model class **Genre** from **Models** project folder and include an ID. Use an int property with the name **GenreId**.
 
 	(Code Snippet - _Models And Data Access - Ex2 Code First Genre_)
 
-	<!-- mark:10,12-14 -->
+	<!-- mark:7 -->
 	````C#
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Web;
-	
 	namespace MvcMusicStore.Models
 	{
-	    public class Genre
-	    {
-	        public int GenreId { get; set; }
-	        public string Name { get; set; }
-	        public string Description { get; set; }
-	        public virtual ICollection<Album> Albums { get; set; }
-	    }
+		 using System.Collections.Generic;
+
+		 public class Genre
+		 {
+			  public int GenreId { get; set; }
+
+			  public string Name { get; set; }
+
+			  public string Description { get; set; }
+
+			  public List<Album> Albums { get; set; }
+		 }
 	}
 	````
 
@@ -418,29 +402,53 @@ Now that you have already configured the connection to the database, you will li
 
 	> You can read more about Code First Conventions in this [msdn article](http://msdn.microsoft.com/en-us/library/hh161541&#040;v=vs.103&#041;.aspx).
 
-1. Now, open the POCO model class **Album** from **Models** project folder and include the AlbumId and GenreId properties.
+1. Now, open the POCO model class **Album** from **Models** project folder and include the foreign keys, create properties with the names **GenreId** and **ArtistId**. This class already have the **GenreId** for the primary key.
 
 	(Code Snippet - _Models And Data Access - Ex2 Code First Album_)
-	<!-- mark:10,12 -->
+
+	<!-- mark:7,9 -->
 	````C#
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Web;
-	
 	namespace MvcMusicStore.Models
 	{
-	    public class Album
-	    {
-	        public int AlbumId { get; set; }
-	        public string Title { get; set; }
-	        public int GenreId { get; set; }
-	        public virtual Genre Genre { get; set; }
-	    }
+		 public class Album
+		 {
+			  public int AlbumId { get; set; }
+
+			  public int GenreId { get; set; }
+
+			  public int ArtistId { get; set; }
+
+			  public string Title { get; set; }
+
+			  public decimal Price { get; set; }
+
+			  public string AlbumArtUrl { get; set; }
+
+			  public virtual Genre Genre { get; set; }
+
+			  public virtual Artist Artist { get; set; }
+		 }
 	}
 	````
 
-1. Right-click the **Models** project folder and select **Add* | New Item**. Under **Code**, choose the **Class** item and name it **MusicStoreEntities.cs**. Then, click **Add.**
+1. Open the POCO model class **Artist** and include the **ArtistId** property.
+
+	(Code Snippet - _Models And Data Access - Ex2 Code First Album_)
+
+	<!-- mark:5 -->
+	````C#
+	namespace MvcMusicStore.Models
+	{
+		 public class Artist
+		 {
+			  public int ArtistId { get; set; }
+
+			  public string Name { get; set; }
+		 }
+	}
+	````
+
+1. Right-click the **Models** project folder and select **Add | Class**. Name the file **MusicStoreEntities.cs**. Then, click **Add.**
 
 	![Adding a class](./images/Adding-a-class.png?raw=true "Adding a class")
 
@@ -478,24 +486,26 @@ Now that you have already configured the connection to the database, you will li
 	
 	namespace MvcMusicStore.Models
 	{
-	    public class MusicStoreEntities : DbContext
-	    {
-	        public DbSet<Genre> Genres { get; set; }
-	        public DbSet<Album> Albums { get; set; }
-	
-		    public MusicStoreEntities() 
-		    {
-				Database.SetInitializer<MusicStoreEntities>(null);
-		    }
+		public class MusicStoreEntities : DbContext
+		{
+			public DbSet<Genre> Genres { get; set; }
+			public DbSet<Album> Albums { get; set; }
+			public DbSet<Artist> Artists { get; set; }
 
-	        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-	        {
-	            modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
-	            modelBuilder.Entity<Genre>().ToTable("Genre");
-	            modelBuilder.Entity<Album>().ToTable("Album");
-	            base.OnModelCreating(modelBuilder);
-	        }
-	    }
+			public MusicStoreEntities()
+			{
+			  Database.SetInitializer<MusicStoreEntities>(null);
+			}
+
+			protected override void OnModelCreating(DbModelBuilder modelBuilder)
+			{
+				modelBuilder.Entity<Genre>().ToTable("Genres");
+				modelBuilder.Entity<Album>().ToTable("Albums");
+				modelBuilder.Entity<Artist>().ToTable("Artists");
+
+				base.OnModelCreating(modelBuilder);
+			}
+		}
 	}
 	````
 
@@ -513,9 +523,9 @@ In this task, you will update the StoreController class so that, instead of usin
 
 > If you completed Exercise 1 you will note these steps are the same in both approaches (Database first or Code first). They are different in how the data is linked with the model, but the access to data entities is yet transparent from the controller.
 
-1. Open **Controllers\StoreController.cs** and add the following field to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
+1. Open **Controllers\StoreController.cs** and add the following field to the class to hold an instance of the **MusicStoreEntities** class, named **storeDB**:
 
-	(Code Snippet - _Models And Data Access - Ex2 Code First storeDB_)
+	(Code Snippet - _Models And Data Access - Ex1 storeDB_)
 
 	<!-- mark:3-4 -->
 	````C#
@@ -524,49 +534,73 @@ In this task, you will update the StoreController class so that, instead of usin
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Index** action to retrieve all **Genre** names in the database. Before this, the genres were hardcoded. Now you will write a LINQ query expression, like the one below, which retrieves the **Name** property of each Genre from the database:
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Details** action method to retrieve album details. Before this update, the values were hardcoded instead.
 
-	(Code Snippet - _Models And Data Access - Ex2 code First Store Index_)
+	(Code Snippet - _Models And Data Access - Ex2 Store Details_)
 
-	<!-- mark:6-9 -->
+	<!-- mark:4 -->
 	````C#
-	//
 	// GET: /Store/
-	
-	public ActionResult Index()
+	public ActionResult Details(int id)
 	{
-	    // Retrieve the list of genres
-	    var genres = from genre in storeDB.Genres
-	                 select genre.Name;
-	
-	    // Create your view model
+		 var album = this.storeDB.Albums.Find(id);
+
+		 if (album == null)
+		 {
+			  return this.HttpNotFound();
+		 }
+
+		 return this.View(album);
 	}
 	````
 
-	> **Note:** You are using a capability of .NET called **LINQ** (language-integrated query) to write strongly-typed query expressions against these collections - which will execute code against the database and return objects that you can program against. 
+1. Update **Browse** action method to retrieve the requested **Genre** with all of its **Albums**. To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+
+	(Code Snippet - _Models And Data Access - Ex2 Store Browse_)
+
+	<!-- mark:4-5 -->
+	````C#
+	public ActionResult Browse(string genre)
+	{
+		 // Retrieve Genre and its Associated Albums from database
+		 var genreModel = this.storeDB.Genres.Include("Albums")
+			  .Single(g => g.Name == genre);
+
+		 return this.View(genreModel);
+	}
+	````
+
+	>**Note:** You are using a capability of .NET called **LINQ** (language-integrated query) to write strongly-typed query expressions against these collections - which will execute code against the database and return objects that you can program against.
 
 	> For more information about LINQ, please visit the [msdn site](http://msdn.microsoft.com/en-us/library/bb397926&#040;v=vs.110&#041;.aspx).
 
-1. Transform the collection of genres to a list. To do this, replace the following code:
+1. Update **Index** action method to retrieve all the genres.
 
-	(Code Snippet - _Models And Data Access - Ex2 Code First Genres to List_)
+	(Code Snippet - _Models And Data Access - Ex2 Store Index_)
 
-	<!-- mark:10-12 -->
+	<!-- mark:3 -->
 	````C#
 	public ActionResult Index()
 	{
-	    // Retrieve the list of genres
-	    var genres = from genre in storeDB.Genres
-	                 select genre.Name;
-	
-	    // Create your view model
-	    var viewModel = new StoreIndexViewModel
-	    {
-	        Genres = genres.ToList(),
-	        NumberOfGenres = genres.Count()
-	    };
-	
-	    return View(viewModel);
+		 var genres = this.storeDB.Genres;
+
+		 return this.View(genres);
+	}
+	````
+
+1. Update **Index** action method to retrieve all the genres and transform the collection to a list.
+
+	(Code Snippet - _Models And Data Access - Ex2 Store GenreMenu_)
+
+	<!-- mark:5 -->
+	````C#
+	// GET: /Store/GenreMenu
+	[ChildActionOnly]
+	public ActionResult GenreMenu()
+	{
+		 var genres = this.storeDB.Genres.ToList();
+
+		 return this.PartialView(genres);
 	}
 	````
 
@@ -576,14 +610,19 @@ In this task, you will update the StoreController class so that, instead of usin
 
 In this task, you will check that the Store Index page will now display the Genres stored in the database instead of the hardcoded ones. There is no need to change the View template because the **StoreController** is returning the same **StoreIndexViewModel** as before, but this time the data will come from the database. 
 
-1. Press **F5** to run the application.
+1. Rebuild the solution and press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store** to verify that the list of **Genres** is no longer the hardcoded list.
+1. The project starts in the Home page. Verify that the menu of **Genres** is no longer a hardcoded list, and the data is directly retrieved from the database.
 
-	![browsinggenresfromdatabase](images/browsinggenresfromdatabase.png?raw=true)
+	![BrowsingGenresFromDataBase](images/browsinggenresfromdatabase.png?raw=true)
 
 	_Browsing Genres from the database_
- 
+
+1. Now browse to any genre and verify the albums are populated from database.
+
+	![Browsing Albums from the database](images/browsing-albums-from-the-database.png?raw=true "Browsing Albums from the database")
+
+	_Browsing Albums from the database_
 
 <a name="Exercise3" />
 ### Exercise 3: Querying the Database with Parameters ###
