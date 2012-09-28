@@ -12,7 +12,14 @@
         // GET: /Store/
         public ActionResult Details(int id)
         {
-            var album = this.storeDB.Albums.Find(id);
+            var album = new Album
+            {
+                Title = "Sample Album",
+                Genre = new Genre { Name = "Sample Genre" },
+                Artist = new Artist { Name = "Sample Artist" },
+                AlbumArtUrl = "~/Content/Images/placeholder.gif",
+                Price = 9.99M
+            };
 
             if (album == null)
             {
@@ -25,8 +32,11 @@
         public ActionResult Browse(string genre)
         {
             // Retrieve Genre and its Associated Albums from database
-            var genreModel = this.storeDB.Genres.Include("Albums")
-                .Single(g => g.Name == genre);
+            var genreModel = new Genre
+            {
+                Name = genre,
+                Albums = this.storeDB.Albums.ToList()
+            };
 
             return this.View(genreModel);
         }

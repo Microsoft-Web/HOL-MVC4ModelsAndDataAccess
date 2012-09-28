@@ -200,37 +200,20 @@ In this task, you will update the StoreController class so that, instead of usin
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Details** action method to retrieve album details. Before this update, the values were hardcoded instead.
-
-	(Code Snippet - _Models And Data Access - Ex1 Store Details_)
-
-	<!-- mark:4 -->
-	````C#
-	// GET: /Store/
-	public ActionResult Details(int id)
-	{
-		 var album = this.storeDB.Albums.Find(id);
-
-		 if (album == null)
-		 {
-			  return this.HttpNotFound();
-		 }
-
-		 return this.View(album);
-	}
-	````
-
-1. Update **Browse** action method to retrieve the requested **Genre** with all of its **Albums**. To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **Browse** action method to retrieve a Genre with all of the **Albums**.
 
 	(Code Snippet - _Models And Data Access - Ex1 Store Browse_)
 
-	<!-- mark:4-5 -->
+	<!-- mark:4-8 -->
 	````C#
 	public ActionResult Browse(string genre)
 	{
 		 // Retrieve Genre and its Associated Albums from database
-		 var genreModel = this.storeDB.Genres.Include("Albums")
-			  .Single(g => g.Name == genre);
+		 var genreModel = new Genre
+	    {
+	        Name = genre,
+	        Albums = this.storeDB.Albums.ToList()
+	    };
 
 		 return this.View(genreModel);
 	}
@@ -534,37 +517,20 @@ In this task, you will update the StoreController class so that, instead of usin
 	    MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
-1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **StoreController**'s **Details** action method to retrieve album details. Before this update, the values were hardcoded instead.
-
-	(Code Snippet - _Models And Data Access - Ex2 Store Details_)
-
-	<!-- mark:4 -->
-	````C#
-	// GET: /Store/
-	public ActionResult Details(int id)
-	{
-		 var album = this.storeDB.Albums.Find(id);
-
-		 if (album == null)
-		 {
-			  return this.HttpNotFound();
-		 }
-
-		 return this.View(album);
-	}
-	````
-
-1. Update **Browse** action method to retrieve the requested **Genre** with all of its **Albums**. To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **Browse** action method to retrieve a Genre with all of the **Albums**.
 
 	(Code Snippet - _Models And Data Access - Ex2 Store Browse_)
 
-	<!-- mark:4-5 -->
+	<!-- mark:4-8 -->
 	````C#
 	public ActionResult Browse(string genre)
 	{
 		 // Retrieve Genre and its Associated Albums from database
-		 var genreModel = this.storeDB.Genres.Include("Albums")
-			  .Single(g => g.Name == genre);
+		 var genreModel = new Genre
+	    {
+	        Name = genre,
+	        Albums = this.storeDB.Albums.ToList()
+	    };
 
 		 return this.View(genreModel);
 	}
@@ -636,23 +602,15 @@ In this task, you will check that the Store Index page will now display the Genr
 
 In this task, you will change the **StoreController** class to access the database to retrieve albums from a specific genre.
 
-1. If not already open, start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
+1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex3-Begin.sln** solution located in the **Source\Ex3-QueryingTheDatabaseWithParametersCodeFirst\Begin** folder if you want to use Code-First approach or **Source\Ex3-QueryingTheDatabaseWithParametersDBFirst\Begin** folder if you want to use Database-First approach.
 
-1. In the **File** menu, choose **Open Project**. In the Open Project dialog, browse to Source\Ex03-QueryingTheDatabaseWithParametersDBFirst\Begin (or Ex03-QueryingTheDatabaseWithParametersCodeFirst\Begin if you want to use a Code First approach), select **MvcMusicStore.sln** and click **Open**. Alternatively, you may continue with the solution that you obtained after completing any of the previous exercises.
+	Alternatively, you may continue with the solution that you obtained after completing any of the previous exercises and skip the steps to restore the NuGet packages.
 
-1.	Follow these steps to install the **NuGet** package dependencies.
+1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
 
-	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
+1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
-	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
-
-	c.	After installing the package, type **Enable-PackageRestore**.
-
-	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
-
-	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
-	
-	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
+1. Build the solution by clicking **Build** | **Build Solution**.
 
 1. Open the **StoreController** class to change the **Browse** action method. To do this, in the **Solution Explorer**, expand the **Controllers** folder and double-click **StoreController.cs**.
 
@@ -660,32 +618,23 @@ In this task, you will change the **StoreController** class to access the databa
 
 	(Code Snippet - _Models And Data Access - Ex3 StoreController BrowseMethod_)
 
-	<!-- mark:6-16 -->
+	<!-- mark:4-5 -->
 	````C#
-	//
-	// GET: /Store/Browse?genre=Disco
-	
 	public ActionResult Browse(string genre)
 	{
-	    // Retrieve Genre and its Associated Albums from database
-	
-	    var genreModel = storeDB.Genres.Include("Albums")
-	        .Single(g => g.Name == genre);
-	
-	    var viewModel = new StoreBrowseViewModel()
-	    {
-	        Genre = genreModel,
-	        Albums = genreModel.Albums.ToList()
-	    };
-	
-	    return View(viewModel);
+		 // Retrieve Genre and its Associated Albums from database
+		 var genreModel = this.storeDB.Genres.Include("Albums")
+			  .Single(g => g.Name == genre);
+
+		 return this.View(genreModel);
 	}
 	````
 
-	> **Note:** You can use the .**Single()** extension in LINQ because in this case only one genre is expected for an album. The **Single()** method takes a Lambda expression as a parameter, which in this case specifies a single Genre object such that its name matches the value defined.
-
-	> **Note:** You will take advantage of a feature that allows you to indicate other related entities you want loaded as well when the Genre object is retrieved. This feature is called **Query Result Shaping**, and enables you to reduce the number of times needed to access the database to retrieve information. In this scenario, you will want to pre-fetch the Albums for the Genre you retrieve.
-
+	> **Note:** To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+	> You can use the .**Single()** extension in LINQ because in this case only one genre is expected for an album. The **Single()** method takes a Lambda expression as a parameter, which in this case specifies a single Genre object such that its name matches the value defined.
+	>
+	> You will take advantage of a feature that allows you to indicate other related entities you want loaded as well when the Genre object is retrieved. This feature is called **Query Result Shaping**, and enables you to reduce the number of times needed to access the database to retrieve information. In this scenario, you will want to pre-fetch the Albums for the Genre you retrieve.
+	>
 	> The query includes **Genres.Include("Albums")** to indicate that you want related albums as well. This will result in a more efficient application, since it will retrieve both Genre and Album data in a single database request.
 
  
@@ -698,9 +647,9 @@ In this task, you will run the application and retrieve albums of a specific gen
 
 1. The project starts in the Home page. Change the URL to **/Store/Browse?genre=Jazz** to verify that the results are being retrieved from the database.
 
- 	![Browsing StoreBrowsegenre=Jazz](./images/Browsing-StoreBrowsegenre=Jazz.png?raw=true "Browsing StoreBrowsegenre=Jazz")
+ 	![Browsing by genre](./images/Browsing-Genre.png?raw=true "Browsing by genre")
  
-	_Browsing /Store/Browse?genre=Jazz_
+	_Browsing /Store/Browse?genre=Pop_
 
  
 <a name="Ex3Task3" />
@@ -713,16 +662,20 @@ In this task, you will repeat the previous procedure to get albums by their Id.
 1. Change the **Details** action method to retrieve albums details based on their **Id**. To do this, replace the following code:
 
 	(Code Snippet - _Models And Data Access - Ex3 StoreController DetailsMethod_)
-	<!-- mark:6-7 -->
+
+	<!-- mark:4 -->
 	````C#
-	//
-	// GET: /Store/Details/5
-	
+	// GET: /Store/
 	public ActionResult Details(int id)
 	{
-	    var album = storeDB.Albums.Single(a => a.AlbumId == id);
-	
-	    return View(album);
+		 var album = this.storeDB.Albums.Find(id);
+
+		 if (album == null)
+		 {
+			  return this.HttpNotFound();
+		 }
+
+		 return this.View(album);
 	}
 	````
 
@@ -734,11 +687,11 @@ In this task, you will run the Application in a web browser and obtain album det
 
 1. Press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store/Details/500** to verify that the results are being retrieved from the database.
+1. The project starts in the Home page. Change the URL to **/Store/Details/51** or browse the genres and select an album to verify that the results are being retrieved from the database.
 
- 	![Browsing StoreDetails500](./images/Browsing-StoreDetails500.png?raw=true "Browsing StoreDetails500")
+ 	![Browsing Details](./images/Browsing-StoreDetails500.png?raw=true "Browsing Details")
  
-	_Browsing /Store/Details/500_
+	_Browsing /Store/Details/51_
 
 <a name="Exercise4" />
 ### Exercise 4 - Using Asynchronous Controllers###
