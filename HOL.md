@@ -53,7 +53,7 @@ This Hands-on Lab is comprised by the following exercises:
 
 1. [Exercise 1: Adding a Database](#Exercise1)
 
-1. [Exercise 2: Adding a Database using Code First](#Exercise2)
+1. [Exercise 2: Creating a Database using Code First](#Exercise2)
 
 1. [Exercise 3: Querying the Database with Parameters](#Exercise3)
 
@@ -273,7 +273,7 @@ In this task, you will check that the Store Index page will now display the Genr
 	_Browsing Albums from the database_
 
 <a name="Exercise2" />
-### Exercise 2: Adding a Database Using Code First ###
+### Exercise 2: Creating a Database Using Code First ###
 
 In this exercise, you will learn how to use the Code First approach to create a database with the tables of the MusicStore application, and how to access its data.
 
@@ -282,15 +282,12 @@ Once the model is generated, you will modify the StoreController to provide the 
 > **Note:** If you have completed Exercise 1 and have already worked with the Database First approach, you will now learn how to get the same results with a different process. The tasks that are in common with Exercise 1 have been marked to make your reading easier. 
 >If you have not completed Exercise 1 but would like to learn the Code First approach, you can start from this exercise and get a full coverage of the topic.
 
-
 <a name="Ex2Task1" />
-#### Task 1 - Adding a Database ####
+#### Task 1 - Populating Sample Data ####
 
-In this task, you will add an already created database with the main tables of the MusicStore application to the solution.
+In this task, you will populate the database with sample data when it is intially created using Code-First.
 
-> **Note:** This task is in common with Exercise 1.
-
-1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex2-Begin.sln** solution located in the **Source\Ex2-AddingADatabaseCodeFirst\Begin** folder of this lab.
+1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex2-Begin.sln** solution located in the **Source\Ex2-CreatingADatabaseCodeFirst\Begin** folder of this lab.
 
 1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
 
@@ -298,35 +295,42 @@ In this task, you will add an already created database with the main tables of t
 
 1. Build the solution by clicking **Build** | **Build Solution**.
 
-1. Add **MvcMusicStore** database file. In this lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
+1. Add the **SampleData.cs** file to the **Models** folder. To do that, right-click the new **Models** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **SampleData.cs** file.
 
- 	![Adding an Existing Item](./images/Adding-an-Existing-Item.png?raw=true "Adding an Existing Item")
+	![Sample data populate code](images/sample-data-populate-code.png?raw=true "Sample data populate code")
  
-	_Adding an Existing Item_
+	_Sample data populate code_
 
- 	![MvcMusicStore.mdf database file](./images/MvcMusicStore.mdf-database-file.png?raw=true "MvcMusicStore.mdf database file")
- 
-	_MvcMusicStore.mdf database file_
+1. Open the **Global.asax.cs** file and add the following _using_ statements.
 
-	The database has been added to the project. Even when the database is located inside the solution, you can query and update it as it was hosted in a different database server.
+	(Code Snippet - _Models And Data Access - Ex2 Global Asax Usings_)
 
- 	![MvcMusicStore database in Solution Explorer](./images/MvcMusicStore-database-in-Solution-Explorer.png?raw=true "MvcMusicStore database in Solution Explorer")
- 
-	_MvcMusicStore database in Solution Explorer_
+	<!-- mark:1-3 -->
+	````C#
+	 using MvcMusicStore.Models;
+	 using System.Data.Entity;
+	````
 
-1. Verify the connection to the database. To do this, open the **Database Explorer** (CTRL+ALT+S), double-click **MvcMusicStore.mdf** and make sure the connection is established.
+1. In the **Application_Start()** method add the following line to set the database initializer.
 
- 	![Connecting to MvcMusicStore.mdf](./images/Connecting-to-MvcMusicStore.mdf.png?raw=true "Connecting to MvcMusicStore.mdf")
- 
-	_Connecting to MvcMusicStore.mdf_
+	(Code Snippet - _Models And Data Access - Ex2 Global Asax SetInitializer_)
 
-1. Close the connection now. To do that, in Database Explorer right-click the MvcMusicStore database and select **Close Connection**.
+	<!-- mark:10 -->
+	````C#
+	protected void Application_Start()
+	{
+		 AreaRegistration.RegisterAllAreas();
 
- 	![Closing the connection](./images/Closing-the-connection.png?raw=true "Closing the connection")
- 
-	_Closing the connection_
+		 WebApiConfig.Register(GlobalConfiguration.Configuration);
+		 FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+		 RouteConfig.RegisterRoutes(RouteTable.Routes);
+		 BundleConfig.RegisterBundles(BundleTable.Bundles);
 
- 
+		 Database.SetInitializer(new SampleData());
+	}
+	````
+
+
 <a name="Ex2Task2" />
 #### Task 2 - Configuring the connection to the Database ####
 
@@ -349,7 +353,6 @@ Now that you have already added a database to our project, you will write in the
 	
 	````
 
- 
 <a name="Ex2Task3" />
 #### Task 3 - Working with the Model ####
 

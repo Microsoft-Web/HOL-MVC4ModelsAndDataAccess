@@ -1,1 +1,0 @@
-Place here the MvcMusicStore.mdf database file.
