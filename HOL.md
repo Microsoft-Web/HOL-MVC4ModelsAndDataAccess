@@ -76,7 +76,7 @@ In this task, you will add an already created database with the main tables of t
 
 1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
-1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
+1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
 1. Build the solution by clicking **Build** | **Build Solution**.
 
@@ -289,7 +289,7 @@ In this task, you will populate the database with sample data when it is intiall
 
 1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
-1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
+1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
 1. Build the solution by clicking **Build** | **Build Solution**.
 
@@ -609,7 +609,7 @@ In this task, you will change the **StoreController** class to access the databa
 
 1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
-1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
+1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
 1. Build the solution by clicking **Build** | **Build Solution**.
 
