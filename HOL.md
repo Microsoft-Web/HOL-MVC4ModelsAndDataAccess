@@ -74,7 +74,7 @@ In this task, you will add an already created database with the main tables of t
 
 1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex1-Begin.sln** solution located in the **Source\Ex1-AddingADatabaseDBFirst\Begin** folder of this lab.
 
-1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
+1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
 1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
@@ -287,7 +287,7 @@ In this task, you will populate the database with sample data when it is intiall
 
 1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex2-Begin.sln** solution located in the **Source\Ex2-CreatingADatabaseCodeFirst\Begin** folder of this lab.
 
-1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
+1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
 1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
@@ -607,7 +607,7 @@ In this task, you will change the **StoreController** class to access the databa
 
 	Alternatively, you may continue with the solution that you obtained after completing any of the previous exercises and skip the steps to restore the NuGet packages.
 
-1. In the Solution Explorer, click the **WebFormsLab** project and select **Manage NuGet Packages**.
+1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
 
 1. In the **Manage NuGet Packages** page, click **Restore** in order to download missing packages.
 
