@@ -56,8 +56,6 @@ This Hands-on Lab is comprised by the following exercises:
 1. [Exercise 2: Creating a Database using Code First](#Exercise2)
 
 1. [Exercise 3: Querying the Database with Parameters](#Exercise3)
-
-1. [Exercise 4: Using Asynchronous Controllers](#Exercise4)
  
 Estimated time to complete this lab: **35 minutes**.
 
@@ -696,114 +694,6 @@ In this task, you will run the Application in a web browser and obtain album det
  
 	_Browsing /Store/Details/51_
 
-<a name="Exercise4" />
-### Exercise 4 - Using Asynchronous Controllers###
-
-Microsoft .NET Framework 4.5 introduces new language features in to provide a new foundation for asynchrony in .NET programming. This new foundation makes asynchronous programming similar to - and about as straightforward as - synchronous programming.
-You are now able to write asynchronous action methods in ASP.NET MVC 4 by using the **AsyncController** class. You can use asynchronous action methods for long-running, non-CPU bound requests. This avoids blocking the Web server from performing work while the request is being processed. The AsyncController class is typically used for long-running Web service calls.
-
-In this exercise, you will implement an Async controller
-to query the database asynchronously.
-
-<a name="Ex4Task1" />
-#### Task 1: Modifying the Home controller to perform an asynchronous query operation ####
-
-1. Start Visual Studio 11 Express Beta for Web from **Start** | **All Programs** | **Microsoft Visual Studio 11 Express** | **Visual Studio 11 Express Beta for Web**.
-
-1. Open the **MVCMusicStore.sln** solution located in **Source\Ex4-Async\Begin** from this lab’s folder. Alternatively, you can continue working with the solution obtained in the previous exercise.
-
-1.	Follow these steps to install the **NuGet** package dependencies.
-
-	a.	Open the **NuGet** **Package Manager Console**. To do this, select **Tools | Library Package Manager | Package Manager Console**.
-
-	b.	In the **Package Manager Console,** type **Install-Package NuGetPowerTools**.
-
-	c.	After installing the package, type **Enable-PackageRestore**.
-
-	d.	Build the solution. The **NuGet** dependencies will be downloaded and installed automatically.
-
-	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
-	
-	>For more information, see this article: <http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages>.
-
-	> **Note:** By enabling the package restore, Visual Studio will automatically download the missing packages when the solution compiles for the first time.
-
-1. Open the **StoreController** class within **Controllers** folder. 
-
-1. Add the following namespace declarations to import the types contained in **System.Collection.ObjectModel** and **System.Threading.Tasks** namespaces.
-
-	(Code Snippet - _Models And Data Access - Ex4 Namespace Declarations_)
-
-	<!-- mark:1-2 -->
-	````C#
-	using System.Collections.ObjectModel;
-	using System.Threading.Tasks;
-	````
-	
-1. In the **StoreController** class, locate the **Index** Action Method. Add the **async** keyword before the return type and make it return the type **Task\<ActionResult\>**.
-
-	(Code Snippet - _Models And Data Access - Ex4 Async method_)
-
-	<!-- mark:1 -->
-	````C#
-	public async Task<ActionResult> Index()
-	````
-
-	> **Note:** By adding the **async** keyword, you indicate the compiler that the method contains asynchronous code.
-
-1. In the **Index** method, replace the **genres** variable declaration with the following code.
-	
-	(Code Snippet - _Models And Data Access - Ex4 GenresDeclaration_)
-
-	<!-- mark:1 -->
-	````C#	
-	var genres = new List<string>();
-	````
-
-1. Add a new **Task** for retreiving the genres' names using the **await** keyword before the task call. To do this, insert the highlighted code after the **genres** declaration.
-
-	(Code Snippet - _Models And Data Access - Ex4 Await Task_)
-	
-	<!-- mark:5-10 -->
-	````C#
-	public async Task<ActionResult> Index()
-	{     
-		var genres = new List<string>();
-
-		await Task.Run(() => {
-			 var result = (from genre in storeDB.Genres
-							  select genre.Name);
-
-			 genres = result.ToList();
-		});
-	````
-	
-	> **Note:** By adding the **await** keyword before the task call, you are telling the compiler to asynchronously wait for the task returned from the method call.
-
-	The complete **Index** method should look like the following code:
-
-	````C#
-	public async Task<ActionResult> Index()
-	{
-		var genres = new List<string>();
-
-		await Task.Run(() => {
-			 var result = (from genre in storeDB.Genres
-							  select genre.Name);
-
-			 genres = result.ToList();
-		});
-
-		var viewModel = new StoreIndexViewModel
-		{
-			 Genres = genres,
-			 NumberOfGenres = genres.Count()
-		};                
-						
-		return View(viewModel);
-	}
-	````
-
 ---
 
 <a name="Summary" />
@@ -820,8 +710,6 @@ By completing this Hands-on Lab you have learned the fundamentals of ASP.NET MVC
 - How to use the Query Result Shaping, a feature that reduces the number of database accesses, retrieving data in a more efficient way
 
 - How to use both Database First and Code First approaches in Microsoft Entity Framework to link the database with the model
-
-- How to implement an Async controller to query the database asynchronously
 
 
 <a name="AppendixA" />
