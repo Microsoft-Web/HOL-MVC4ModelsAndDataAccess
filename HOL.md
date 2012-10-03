@@ -1,7 +1,6 @@
 ﻿<a name="HOLTop" />
 
 # ASP.NET MVC 4 Models and Data Access #
-
 ---
 
 <a name="Overview" />
@@ -33,16 +32,21 @@ The benefits of using this approach is that the Model remains independent from t
 
 > If you wish to explore the whole **Music Store** tutorial application you can find it in [http://mvcmusicstore.codeplex.com/](http://mvcmusicstore.codeplex.com/).
 
-<a name="SystemRequirements" />
-### System Requirements ###
+<a name="Prerequisites" />
+### Prerequisites ###
 
 You must have the following items to complete this lab:
 
 - [Microsoft Visual Studio Express 2012 for Web](http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-web) or superior (read [Appendix A](#AppendixA) for instructions on how to install it).
 
-### Installing Code Snippets ###
+<a name="Setup" /> 
+### Setup ###
 
-For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Setup\CodeSnippets.vsi** file.
+**Installing Code Snippets**
+
+For convenience, much of the code you will be managing along this lab is available as Visual Studio code snippets. To install the code snippets run **.\Source\Assets\CodeSnippets.vsi** file.
+
+If you are not familiar with the Visual Studio Code Snippets, and want to learn how to use them, you can refer to the appendix from this document "[Appendix C: Using Code Snippets](#AppendixC)".
 
 ---
 
@@ -57,11 +61,10 @@ This Hands-on Lab is comprised by the following exercises:
 
 1. [Exercise 3: Querying the Database with Parameters](#Exercise3)
  
-Estimated time to complete this lab: **35 minutes**.
-
 > **Note:** Each exercise is accompanied by an **End** folder containing the resulting solution you should obtain after completing the exercises. You can use this solution as a guide if you need additional help working through the exercises.
 
- 
+Estimated time to complete this lab: **35 minutes**.
+
 <a name="Exercise1" />
 ### Exercise 1: Adding a Database ###
 
@@ -72,13 +75,15 @@ In this exercise, you will learn how to add a database with the tables of the Mu
 
 In this task, you will add an already created database with the main tables of the MusicStore application to the solution. 
 
-1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex1-Begin.sln** solution located in the **Source\Ex1-AddingADatabaseDBFirst\Begin** folder of this lab.
+1. Open the **Begin** solution located at **Source/Ex1-AddingADatabaseDBFirst/Begin/** folder.
 
-1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
+	1. You will need to download some missing NuGet packages before continue. To do this, click the **Project** menu and select **Manage NuGet Packages**.
 
-1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
+	1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
-1. Build the solution by clicking **Build** | **Build Solution**.
+	1. Finally, build the solution by clicking **Build** | **Build Solution**.
+
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
 
 1. Add **MvcMusicStore** database file. In this Hands-on Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
 
@@ -285,13 +290,15 @@ Once the model is generated, you will modify the StoreController to provide the 
 
 In this task, you will populate the database with sample data when it is intially created using Code-First.
 
-1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex2-Begin.sln** solution located in the **Source\Ex2-CreatingADatabaseCodeFirst\Begin** folder of this lab.
+1. Open the **Begin** solution located at **Source/Ex2-CreatingADatabaseCodeFirst/Begin/** folder. Otherwise, you might continue using the **End** solution obtained by completing the previous exercise.
 
-1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
+	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click the **Project** menu and select **Manage NuGet Packages**.
 
-1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
+	1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
-1. Build the solution by clicking **Build** | **Build Solution**.
+	1. Finally, build the solution by clicking **Build** | **Build Solution**.
+
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
 
 1. Add the **SampleData.cs** file to the **Models** folder. To do that, right-click the new **Models** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **SampleData.cs** file.
 
@@ -603,15 +610,15 @@ In this task, you will check that the Store Index page will now display the Genr
 
 In this task, you will change the **StoreController** class to access the database to retrieve albums from a specific genre.
 
-1. Open **Visual Studio 2012** and open the **DataAccessLab-Ex3-Begin.sln** solution located in the **Source\Ex3-QueryingTheDatabaseWithParametersCodeFirst\Begin** folder if you want to use Code-First approach or **Source\Ex3-QueryingTheDatabaseWithParametersDBFirst\Begin** folder if you want to use Database-First approach.
+1. Open the **Begin** solution located at the **Source\Ex3-QueryingTheDatabaseWithParametersCodeFirst\Begin** folder if you want to use Code-First approach or **Source\Ex3-QueryingTheDatabaseWithParametersDBFirst\Begin** folder if you want to use Database-First approach. Otherwise, you might continue using the **End** solution obtained by completing the previous exercise.
 
-	Alternatively, you may continue with the solution that you obtained after completing any of the previous exercises and skip the steps to restore the NuGet packages.
+	1. If you opened the provided **Begin** solution, you will need to download some missing NuGet packages before continue. To do this, click the **Project** menu and select **Manage NuGet Packages**.
 
-1. In the Solution Explorer, right-click the **MvcMusicStore** project and select **Manage NuGet Packages**.
+	1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
 
-1. In the **Manage NuGet Packages** dialog, click **Restore** in order to download missing packages.
+	1. Finally, build the solution by clicking **Build** | **Build Solution**.
 
-1. Build the solution by clicking **Build** | **Build Solution**.
+	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
 
 1. Open the **StoreController** class to change the **Browse** action method. To do this, in the **Solution Explorer**, expand the **Controllers** folder and double-click **StoreController.cs**.
 
@@ -693,6 +700,8 @@ In this task, you will run the Application in a web browser and obtain album det
  	![Browsing Details](./images/Browsing-StoreDetails500.png?raw=true "Browsing Details")
  
 	_Browsing /Store/Details/51_
+
+>**Note:** Additionally, you can deploy this application to Windows Azure Web Sites following [Appendix B: Publishing an ASP.NET MVC 4 Application using Web Deploy](#AppendixB).
 
 ---
 

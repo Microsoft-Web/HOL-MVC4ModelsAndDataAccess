@@ -2,11 +2,19 @@
 <Lab xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ContentFramework.Core.Models">
   <Id>ASPNETMVC4ModelsAndDataAccess</Id>
   <Author>
-    <Name>.</Name>
+    <Name></Name>
   </Author>
-  <Description>This Hands-on Lab will show you how to use the free SQL Server Express as a database engine in order to store and retrieve the data needed for the Music Store application. To accomplish that, you will start with an already created database, from which you will generate the Entity Data Model you will use in the application.</Description>  
+  <Description>This Hands-on Lab will show you how to use a database engine in order to store and retrieve the data needed for the Music Store application. To accomplish that, you will start with an existing database and create the Entity Data Model from it. Throughout this lab, you will meet the Database-First approach as well as the Code-First approach.</Description>  
   <Document ConversionType="Html">.\HOL.md</Document>
   <Title>ASP.NET MVC 4 Models and Data Access</Title>
-  <Version>2.0.0</Version>
-  <Source>Source</Source>
+  <Version>2.1.0</Version>
+  <Source>.\Source</Source>
+  <Technologies>
+    <Technology>Visual Studio</Technology>
+    <Technology>.NET Framework</Technology>
+	<Technology>ASP.NET MVC</Technology>
+  </Technologies>
+  <CustomProperties>
+    <Property Name="GitHubRepository" Value="https://github.com/Microsoft-Web/HOL-MVC4ModelsAndDataAccess" />
+  </CustomProperties>
 </Lab>
