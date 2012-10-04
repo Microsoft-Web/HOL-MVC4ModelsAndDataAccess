@@ -496,9 +496,6 @@ Now that you have already configured the connection to the database, you will li
 	````
 
 	> **Note:** With Entity Framework **DbContext** and **DBSet** you will be able to query the POCO class Genre. By extending **OnModelCreating** method, you are specifying in the **code** how Genre will be mapped to a database table. You can find more information about DBContext and DBSet in this msdn article: [link](http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext&#040;v=vs.103&#041;.aspx)
-
-	> **Note:** By default, entity framework will try to create the database. In order to avoid that, you will configure the database initializer in the **MusicStoreEntities** constructor to a null value to prevent the database initialization.
-
  
 <a name="Ex2Task4" />
 #### Task 4 - Querying the Database ####
