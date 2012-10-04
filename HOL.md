@@ -483,11 +483,6 @@ Now that you have already configured the connection to the database, you will li
 			public DbSet<Album> Albums { get; set; }
 			public DbSet<Artist> Artists { get; set; }
 
-			public MusicStoreEntities()
-			{
-			  Database.SetInitializer<MusicStoreEntities>(null);
-			}
-
 			protected override void OnModelCreating(DbModelBuilder modelBuilder)
 			{
 				modelBuilder.Entity<Genre>().ToTable("Genres");
