@@ -7,7 +7,7 @@
 
     public class StoreController : Controller
     {
-        MusicStoreEntities storeDB = new MusicStoreEntities();
+        private MusicStoreEntities storeDB = new MusicStoreEntities();
 
         // GET: /Store/
         public ActionResult Details(int id)

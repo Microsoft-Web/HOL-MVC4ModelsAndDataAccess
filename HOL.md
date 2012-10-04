@@ -200,7 +200,7 @@ In this task, you will update the StoreController class so that, instead of usin
 	````C#
 	public class StoreController : Controller
 	{
-	    MusicStoreEntities storeDB = new MusicStoreEntities();
+	    private MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **Browse** action method to retrieve a Genre with all of the **Albums**.
@@ -211,14 +211,14 @@ In this task, you will update the StoreController class so that, instead of usin
 	````C#
 	public ActionResult Browse(string genre)
 	{
-		 // Retrieve Genre and its Associated Albums from database
-		 var genreModel = new Genre
+	    // Retrieve Genre and its Associated Albums from database
+	    var genreModel = new Genre
 	    {
 	        Name = genre,
 	        Albums = this.storeDB.Albums.ToList()
 	    };
 
-		 return this.View(genreModel);
+	    return this.View(genreModel);
 	}
 	````
 
@@ -466,7 +466,7 @@ Now that you have already configured the connection to the database, you will li
 
 	(Code Snippet - _Models And Data Access - Ex2 Code First MusicStoreEntities_)
 
-	<!-- mark:10-27 -->
+	<!-- mark:10-26 -->
 	````C#
 	using System;
 	using System.Collections.Generic;
@@ -480,7 +480,9 @@ Now that you have already configured the connection to the database, you will li
 		public class MusicStoreEntities : DbContext
 		{
 			public DbSet<Genre> Genres { get; set; }
+
 			public DbSet<Album> Albums { get; set; }
+
 			public DbSet<Artist> Artists { get; set; }
 
 			protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -514,7 +516,7 @@ In this task, you will update the StoreController class so that, instead of usin
 	````C#
 	public class StoreController : Controller
 	{
-	    MusicStoreEntities storeDB = new MusicStoreEntities();
+	    private MusicStoreEntities storeDB = new MusicStoreEntities();
 	````
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **Browse** action method to retrieve a Genre with all of the **Albums**.

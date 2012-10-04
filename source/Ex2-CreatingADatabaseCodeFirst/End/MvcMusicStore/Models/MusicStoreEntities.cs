@@ -10,7 +10,9 @@ namespace MvcMusicStore.Models
     public class MusicStoreEntities : DbContext
     {
         public DbSet<Genre> Genres { get; set; }
+
         public DbSet<Album> Albums { get; set; }
+
         public DbSet<Artist> Artists { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
