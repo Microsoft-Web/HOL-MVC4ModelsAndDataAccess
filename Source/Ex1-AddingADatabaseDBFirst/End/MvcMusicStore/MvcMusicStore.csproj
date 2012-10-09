@@ -205,7 +205,9 @@
     <Content Include="Content\Images\home-showcase.png" />
     <Content Include="Content\Images\home-showcaseSm.png" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logo.svg" />
     <Content Include="Content\Images\placeholder.gif" />
+    <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -262,7 +264,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Images\Thumbs.db" />
     <EntityDeploy Include="Models\StoreDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StoreDB.Designer.cs</LastGenOutput>

@@ -250,7 +250,7 @@ In this task, you will update the StoreController class so that, instead of usin
 	[ChildActionOnly]
 	public ActionResult GenreMenu()
 	{
-		 var genres = this.storeDB.Genres.ToList();
+		 var genres = this.storeDB.Genres.Take(9).ToList();
 
 		 return this.PartialView(genres);
 	}
@@ -566,7 +566,7 @@ In this task, you will update the StoreController class so that, instead of usin
 	[ChildActionOnly]
 	public ActionResult GenreMenu()
 	{
-		 var genres = this.storeDB.Genres.ToList();
+		 var genres = this.storeDB.Genres.Take(9).ToList();
 
 		 return this.PartialView(genres);
 	}
@@ -647,7 +647,7 @@ In this task, you will run the application and retrieve albums of a specific gen
 
 1. Press **F5** to run the Application.
 
-1. The project starts in the Home page. Change the URL to **/Store/Browse?genre=Jazz** to verify that the results are being retrieved from the database.
+1. The project starts in the Home page. Change the URL to **/Store/Browse?genre=Pop** to verify that the results are being retrieved from the database.
 
  	![Browsing by genre](./images/Browsing-Genre.png?raw=true "Browsing by genre")
  
