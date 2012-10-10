@@ -85,7 +85,7 @@ In this task, you will add an already created database with the main tables of t
 
 	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
 
-1. Add **MvcMusicStore** database file. In this Hands-on Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click the new **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
+1. Add **MvcMusicStore** database file. In this Hands-on Lab, you will use an already created database called **MvcMusicStore.mdf**. To do that, right-click **App_Data** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **MvcMusicStore.mdf** file.
 
  	![Adding an Existing Item](./images/Adding-an-Existing-Item.png?raw=true "Adding an Existing Item")
  
@@ -132,7 +132,7 @@ In this task, you will create a data model to interact with the database added i
 
 	![Choose data source](images/choose-data-source.png?raw=true "Choose data source")
 
-	_Choose data source_
+	_Choose data source dialog_
 
 1. Click **Browse** and select the database **MvcMusicStore.mdf** you located in the **App_Data** folder and click **OK**.
 
@@ -300,7 +300,7 @@ In this task, you will populate the database with sample data when it is intiall
 
 	>**Note:** One of the advantages of using NuGet is that you don't have to ship all the libraries in your project, reducing the project size. With NuGet Power Tools, by specifying the package versions in the Packages.config file, you will be able to download all the required libraries the first time you run the project. This is why you will have to run these steps after you open an existing solution from this lab.
 
-1. Add the **SampleData.cs** file to the **Models** folder. To do that, right-click the new **Models** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **SampleData.cs** file.
+1. Add the **SampleData.cs** file to the **Models** folder. To do that, right-click **Models** folder, point to **Add** and then click **Existing Item**. Browse to **\Source\Assets\** and select the **SampleData.cs** file.
 
 	![Sample data populate code](images/sample-data-populate-code.png?raw=true "Sample data populate code")
  
@@ -310,7 +310,7 @@ In this task, you will populate the database with sample data when it is intiall
 
 	(Code Snippet - _Models And Data Access - Ex2 Global Asax Usings_)
 
-	<!-- mark:1-3 -->
+	<!-- mark:1-2 -->
 	````C#
 	 using MvcMusicStore.Models;
 	 using System.Data.Entity;
@@ -497,7 +497,7 @@ Now that you have already configured the connection to the database, you will li
 	}
 	````
 
-	> **Note:** With Entity Framework **DbContext** and **DBSet** you will be able to query the POCO class Genre. By extending **OnModelCreating** method, you are specifying in the **code** how Genre will be mapped to a database table. You can find more information about DBContext and DBSet in this msdn article: [link](http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext&#040;v=vs.103&#041;.aspx)
+	> **Note:** With Entity Framework **DbContext** and **DBSet** you will be able to query the POCO class Genre. By extending **OnModelCreating** method, you are specifying in the **code** how Genre will be mapped to a database table. You can find more information about DBContext and DBSet in this msdn article: [link](http://msdn.microsoft.com/en-us/library/system.data.entity.dbcontext(v=vs.103).aspx)
  
 <a name="Ex2Task4" />
 #### Task 4 - Querying the Database ####
@@ -512,11 +512,13 @@ In this task, you will update the StoreController class so that, instead of usin
 
 	(Code Snippet - _Models And Data Access - Ex1 storeDB_)
 
-	<!-- mark:3-4 -->
+	<!-- mark:3 -->
 	````C#
 	public class StoreController : Controller
 	{
 	    private MusicStoreEntities storeDB = new MusicStoreEntities();
+		...
+	}
 	````
 
 1. The **MusicStoreEntities** class exposes a collection property for each table in the database. Update **Browse** action method to retrieve a Genre with all of the **Albums**.
@@ -540,7 +542,7 @@ In this task, you will update the StoreController class so that, instead of usin
 
 	>**Note:** You are using a capability of .NET called **LINQ** (language-integrated query) to write strongly-typed query expressions against these collections - which will execute code against the database and return objects that you can program against.
 
-	> For more information about LINQ, please visit the [msdn site](http://msdn.microsoft.com/en-us/library/bb397926&#040;v=vs.110&#041;.aspx).
+	> For more information about LINQ, please visit the [msdn site](http://msdn.microsoft.com/en-us/library/bb397926(v=vs.110).aspx).
 
 1. Update **Index** action method to retrieve all the genres.
 
@@ -632,7 +634,7 @@ In this task, you will change the **StoreController** class to access the databa
 	}
 	````
 
-	> **Note:** To populate the a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
+	> **Note:** To populate a collection of the entity, you need to use the **Include** method to specify you want to retrieve the albums too.
 	> You can use the .**Single()** extension in LINQ because in this case only one genre is expected for an album. The **Single()** method takes a Lambda expression as a parameter, which in this case specifies a single Genre object such that its name matches the value defined.
 	>
 	> You will take advantage of a feature that allows you to indicate other related entities you want loaded as well when the Genre object is retrieved. This feature is called **Query Result Shaping**, and enables you to reduce the number of times needed to access the database to retrieve information. In this scenario, you will want to pre-fetch the Albums for the Genre you retrieve.
@@ -702,7 +704,7 @@ In this task, you will run the Application in a web browser and obtain album det
 <a name="Summary" />
 ## Summary ##
 
-By completing this Hands-on Lab you have learned the fundamentals of ASP.NET MVC Models and Data Access, using the **Database First** approach as well as the **Code First Approach**:
+By completing this Hands-on Lab you have learned the fundamentals of ASP.NET MVC Models and Data Access, using the **Database First** approach as well as the **Code First** Approach:
 
 - How to add a database to the solution in order to consume its data
 

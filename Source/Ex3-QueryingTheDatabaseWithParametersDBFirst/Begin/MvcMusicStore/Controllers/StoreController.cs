@@ -7,6 +7,8 @@
 
     public class StoreController : Controller
     {
+        private MusicStoreEntities storeDB = new MusicStoreEntities();
+
         // GET: /Store/
         public ActionResult Details(int id)
         {
@@ -33,12 +35,7 @@
             var genreModel = new Genre
             {
                 Name = genre,
-                Albums = new List<Album>
-                {
-                    new Album { Title = "Album 1" },
-                    new Album { Title = "Album 2" },
-                    new Album { Title = "Album 3" }
-                }
+                Albums = this.storeDB.Albums.ToList()
             };
 
             return this.View(genreModel);
@@ -46,12 +43,7 @@
 
         public ActionResult Index()
         {
-            var genres = new List<Genre>
-            {
-                new Genre { Name = "Rock" },
-                new Genre { Name = "Jazz" },
-                new Genre { Name = "Metal" }
-            };
+            var genres = this.storeDB.Genres;
 
             return this.View(genres);
         }
@@ -60,12 +52,7 @@
         [ChildActionOnly]
         public ActionResult GenreMenu()
         {
-            var genres = new List<Genre>
-            {
-                new Genre { Name = "Rock" },
-                new Genre { Name = "Jazz" },
-                new Genre { Name = "Metal" }
-            };
+            var genres = this.storeDB.Genres.Take(9).ToList(); 
 
             return this.PartialView(genres);
         }
